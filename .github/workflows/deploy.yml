@@ -169,7 +169,7 @@ jobs:
     # Map branch → environment name for protection rules / env URLs
     environment:
       name: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
-      url: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_APP_URL || '' }}
+      url: ${{ vars.APP_URL }}
 
     steps:
       - name: Checkout source (for compose file, if needed)
