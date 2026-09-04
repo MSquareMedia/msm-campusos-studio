@@ -1,0 +1,42 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# .dockerignore — keep the build context lean
+# ─────────────────────────────────────────────────────────────────────────────
+.git
+.gitignore
+.github
+.agents
+.claude
+.mcp.json
+
+# Next.js build output (rebuilt inside Docker)
+.next
+out
+
+# Local dev / OS noise
+node_modules
+npm-debug.log*
+.DS_Store
+Thumbs.db
+
+# Editor configs
+.vscode
+.idea
+*.swp
+*.swo
+
+# Env files — never bake secrets into the image
+.env
+.env.*
+!.env.example
+
+# Test & CI artefacts
+coverage
+*.test.*
+*.spec.*
+
+# Docs
+README.md
+ADMIN_SETUP.md
+ASSET_MANIFEST.md
+IMPLEMENTATION_NOTES.md
+CLAUDE.md
