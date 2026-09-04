@@ -1,0 +1,258 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# CI/CD — Build → Push → Deploy
+#
+# Trigger:  push to `main` (production) or `develop` (staging)
+#           manual dispatch from the Actions UI
+#
+# Flow:
+#   1. lint  — ESLint on the source
+#   2. build — Docker multi-stage build + push to GitHub Container Registry
+#   3. deploy — SSH into the Linux VM, pull the new image, restart the container
+#
+# Required GitHub Actions Secrets  (Settings → Secrets → Actions):
+#
+#   GHCR_TOKEN              Personal Access Token with `write:packages` scope
+#                           (or use the auto-generated GITHUB_TOKEN — see note
+#                            in the build job)
+#
+#   VM_HOST                 Public IP or hostname of the target Linux VM
+#   VM_USER                 SSH username on the VM  (e.g. ubuntu / ec2-user)
+#   VM_SSH_PASSWORD         SSH password for the above user
+#   VM_SSH_PORT             SSH port  (default 22, optional)
+#
+#   # ── Runtime environment variables injected into the container ──────────
+#   DATABASE_URL            Neon / Postgres connection string
+#   ANTHROPIC_API_KEY       Anthropic SDK key
+#   UPSTASH_REDIS_REST_URL  Upstash Redis REST endpoint
+#   UPSTASH_REDIS_REST_TOKEN Upstash Redis token
+#
+#   # ── Build-time NEXT_PUBLIC_* vars (baked into the JS bundle) ─────────
+#   NEXT_PUBLIC_APP_URL     e.g. https://yourdomain.com
+#   NEXT_PUBLIC_SITE_NAME   e.g. "MSM CampusOS Studio"
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: CI/CD — Build & Deploy
+
+on:
+  push:
+    branches:
+      - main       # production
+      - develop    # staging
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Target environment (production / staging)"
+        required: false
+        default: "production"
+
+# Concurrency: cancel in-flight runs on the same branch so we never deploy
+# an older commit on top of a newer one.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  REGISTRY: ghcr.io
+  # Image name: ghcr.io/<owner>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────
+  # JOB 1 — Lint
+  # ─────────────────────────────────────────────────────────────────────────
+  lint:
+    name: 🔍 Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # JOB 2 — Build & Push Docker image to GHCR
+  # ─────────────────────────────────────────────────────────────────────────
+  build:
+    name: 🐳 Build & Push Image
+    runs-on: ubuntu-latest
+    needs: lint
+    permissions:
+      contents: read
+      packages: write   # required to push to ghcr.io
+
+    outputs:
+      image_tag: ${{ steps.meta.outputs.tags }}
+      short_sha: ${{ steps.sha.outputs.short }}
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      # Expose a short commit SHA for tagging
+      - name: Set short SHA
+        id: sha
+        run: echo "short=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      # Enable multi-platform builds and layer caching
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Authenticate to GitHub Container Registry
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          # Use the fine-grained GHCR_TOKEN secret, or fall back to the
+          # auto-provided GITHUB_TOKEN (works for public repos / same-org pushes)
+          password: ${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}
+
+      # Generate OCI-compliant image tags + labels automatically
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            # Tag: branch name  (main → latest, develop → develop)
+            type=ref,event=branch
+            # Tag: short commit SHA  e.g. sha-a1b2c3d
+            type=sha,prefix=sha-,format=short
+            # Tag: semver if a version tag is pushed  e.g. v1.2.3
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+          labels: |
+            org.opencontainers.image.title=MSM CampusOS Studio
+            org.opencontainers.image.description=Next.js production image
+            org.opencontainers.image.vendor=MSquareMedia
+
+      # Build the multi-stage image and push all tags
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Pass NEXT_PUBLIC_* build-args from secrets
+          build-args: |
+            NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
+            NEXT_PUBLIC_SITE_NAME=${{ secrets.NEXT_PUBLIC_SITE_NAME }}
+          # GitHub Actions cache — speeds up subsequent builds significantly
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # Build for Linux AMD64 (target VM architecture)
+          platforms: linux/amd64
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # JOB 3 — Deploy to Linux VM via SSH
+  # ─────────────────────────────────────────────────────────────────────────
+  deploy:
+    name: 🚀 Deploy to VM
+    runs-on: ubuntu-latest
+    needs: build
+
+    # Only deploy from main (production) or develop (staging)
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+
+    # Map branch → environment name for protection rules / env URLs
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+      url: ${{ github.ref == 'refs/heads/main' && secrets.NEXT_PUBLIC_APP_URL || '' }}
+
+    steps:
+      - name: Checkout source (for compose file, if needed)
+        uses: actions/checkout@v4
+
+      # ── Determine the exact image tag to deploy ───────────────────────
+      - name: Set deploy image tag
+        id: tag
+        run: |
+          SHORT_SHA="${{ needs.build.outputs.short_sha }}"
+          echo "image=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:sha-${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+
+      # ── SSH into the VM and hot-swap the container ────────────────────
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USER }}
+          password: ${{ secrets.VM_SSH_PASSWORD }}
+          port: ${{ secrets.VM_SSH_PORT || 22 }}
+          # The heredoc script runs on the remote VM
+          script: |
+            set -euo pipefail
+
+            REGISTRY="${{ env.REGISTRY }}"
+            IMAGE="${{ steps.tag.outputs.image }}"
+            CONTAINER_NAME="msm-campusos-studio"
+            HOST_PORT="${{ secrets.HOST_PORT || '3000' }}"
+
+            echo "▶ Logging in to GHCR..."
+            echo "${{ secrets.GHCR_TOKEN || secrets.GITHUB_TOKEN }}" \
+              | docker login "$REGISTRY" \
+                  --username "${{ github.actor }}" \
+                  --password-stdin
+
+            echo "▶ Pulling image: $IMAGE"
+            docker pull "$IMAGE"
+
+            echo "▶ Stopping & removing old container (if any)..."
+            docker stop  "$CONTAINER_NAME" 2>/dev/null || true
+            docker rm    "$CONTAINER_NAME" 2>/dev/null || true
+
+            echo "▶ Starting new container..."
+            docker run -d \
+              --name    "$CONTAINER_NAME" \
+              --restart unless-stopped \
+              -p        "${HOST_PORT}:3000" \
+              -e NODE_ENV=production \
+              -e PORT=3000 \
+              -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+              -e ANTHROPIC_API_KEY="${{ secrets.ANTHROPIC_API_KEY }}" \
+              -e UPSTASH_REDIS_REST_URL="${{ secrets.UPSTASH_REDIS_REST_URL }}" \
+              -e UPSTASH_REDIS_REST_TOKEN="${{ secrets.UPSTASH_REDIS_REST_TOKEN }}" \
+              "$IMAGE"
+
+            echo "▶ Pruning dangling images to free disk space..."
+            docker image prune -f
+
+            echo "✅ Deployment complete — running container:"
+            docker ps --filter "name=$CONTAINER_NAME" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # JOB 4 — Health-check (runs after deploy, non-blocking)
+  # ─────────────────────────────────────────────────────────────────────────
+  healthcheck:
+    name: 🩺 Health Check
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Wait for app to become ready (max 60 s)
+        run: |
+          APP_URL="${{ secrets.NEXT_PUBLIC_APP_URL }}"
+          echo "Checking $APP_URL ..."
+          for i in $(seq 1 12); do
+            STATUS=$(curl -o /dev/null -s -w "%{http_code}" "$APP_URL" || true)
+            echo "Attempt $i — HTTP $STATUS"
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ App is healthy!"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "❌ App did not respond with 200 within 60 s"
+          exit 1
