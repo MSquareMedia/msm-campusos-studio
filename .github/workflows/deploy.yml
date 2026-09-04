@@ -296,8 +296,8 @@ jobs:
             echo "▶ Switching nginx upstream → port $NEW_PORT"
             printf 'upstream campusos_app {\n    server 127.0.0.1:%s;\n}\n' \
               "$NEW_PORT" > "$NGINX_UPSTREAM"
-            sudo nginx -t
-            sudo nginx -s reload
+            sudo nginx -t       < /dev/null
+            sudo nginx -s reload < /dev/null > /dev/null 2>&1
             echo "✅ nginx reloaded — traffic now on $NEW_NAME"
 
             # ── Drain in-flight requests then kill old slot ────────────────
