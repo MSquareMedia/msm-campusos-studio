@@ -199,7 +199,9 @@ jobs:
           username: ${{ secrets.VM_USER }}
           password: ${{ secrets.VM_SSH_PASSWORD }}
           port: ${{ secrets.VM_SSH_PORT || 22 }}
-          request_pty: true   # allocates a pseudo-TTY — required for sudo with requiretty
+          # sudo works without a TTY — /etc/sudoers has:
+          #   Defaults:msm-mlapi !requiretty
+          #   msm-mlapi ALL=(ALL) NOPASSWD: /usr/sbin/nginx
           # Blue-green deployment strategy:
           #   1. Pull new image
           #   2. Boot new container on alternate internal port
@@ -296,8 +298,8 @@ jobs:
             echo "▶ Switching nginx upstream → port $NEW_PORT"
             printf 'upstream campusos_app {\n    server 127.0.0.1:%s;\n}\n' \
               "$NEW_PORT" > "$NGINX_UPSTREAM"
-            sudo nginx -t       < /dev/null
-            sudo nginx -s reload < /dev/null > /dev/null 2>&1
+            sudo nginx -t
+            sudo nginx -s reload
             echo "✅ nginx reloaded — traffic now on $NEW_NAME"
 
             # ── Drain in-flight requests then kill old slot ────────────────
