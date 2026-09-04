@@ -53,7 +53,7 @@ concurrency:
 
 env:
   REGISTRY: ghcr.io
-  # Image name: ghcr.io/<owner>/<repo>
+  # github.repository preserves casing — jobs lowercase it before use
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
@@ -97,6 +97,11 @@ jobs:
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
+
+      # Docker requires all-lowercase image names; org names like MSquareMedia
+      # contain uppercase letters that cause "invalid reference format" errors.
+      - name: Lowercase image name
+        run: echo "IMAGE_NAME=$(echo '${{ env.IMAGE_NAME }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
 
       # Expose a short commit SHA for tagging
       - name: Set short SHA
@@ -174,6 +179,10 @@ jobs:
     steps:
       - name: Checkout source (for compose file, if needed)
         uses: actions/checkout@v4
+
+      # Keep image name lowercase (same fix as build job)
+      - name: Lowercase image name
+        run: echo "IMAGE_NAME=$(echo '${{ env.IMAGE_NAME }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
 
       # ── Determine the exact image tag to deploy ───────────────────────
       - name: Set deploy image tag
