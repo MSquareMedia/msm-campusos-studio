@@ -294,11 +294,8 @@ jobs:
 
             # ── Switch nginx upstream (atomic, zero dropped connections) ───
             echo "▶ Switching nginx upstream → port $NEW_PORT"
-            sudo tee "$NGINX_UPSTREAM" > /dev/null <<NGINX
-            upstream campusos_app {
-                server 127.0.0.1:${NEW_PORT};
-            }
-            NGINX
+            printf 'upstream campusos_app {\n    server 127.0.0.1:%s;\n}\n' \
+              "$NEW_PORT" | sudo tee "$NGINX_UPSTREAM" > /dev/null
             sudo nginx -t
             sudo nginx -s reload
             echo "✅ nginx reloaded — traffic now on $NEW_NAME"
