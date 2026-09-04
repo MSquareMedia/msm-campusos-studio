@@ -8,6 +8,10 @@ import type { NextConfig } from "next";
  * a pre-rebrand /campusos/* URL.
  */
 const nextConfig: NextConfig = {
+  // Required for Docker deployment: produces a self-contained .next/standalone
+  // directory that the runner stage copies into the minimal Alpine image.
+  output: "standalone",
+
   async redirects() {
     return [
       { source: "/campusos/about", destination: "/about", permanent: true },
