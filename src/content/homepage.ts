@@ -1,7 +1,10 @@
 export const homepage = {
   metaTitle: "SOTAPO: we move what matters",
+  // Education named in the first clause, not just later in the sentence,
+  // so it still shows when Google truncates the description around 155-160
+  // characters.
   metaDescription:
-    "SOTAPO is a growth agency for automotive, healthcare, real estate, and beyond, moving revenue up, cost down, and customers closer. In education, as Sotapo Education (powered by MSM CampusOS), we go further and run the operation behind the growth.",
+    "SOTAPO is a growth agency for education, automotive, healthcare, real estate, and beyond, moving revenue up, cost down, and customers closer. In education, as Sotapo Education (powered by MSM CampusOS), we go further and run the operation behind the growth.",
   hero: {
     eyebrow: "SOTAPO",
     headline: "We move what matters.",

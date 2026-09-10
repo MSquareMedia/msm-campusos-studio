@@ -88,20 +88,21 @@ const steps: StepDef[] = [
   {
     id: "spend",
     eyebrow: "Investment",
-    question: "Roughly what goes into marketing each month?",
-    help: "A band is fine. It tells us which levers are realistic, nothing more.",
+    question: "How much budget do you wish to spend on overall digital activities?",
+    help: "A band is fine. It tells us what to pitch within it, not just which levers are realistic.",
     fields: [
       {
         kind: "choice",
         name: "spend",
-        label: "Monthly marketing spend",
-        validate: choiceRequired("Pick a band so we know which levers are on the table."),
+        label: "Monthly digital budget",
+        validate: choiceRequired("Pick a band so we know what to pitch within it."),
         options: [
           { value: "none", label: "Nothing on paid media yet" },
           { value: "lt-10k", label: "Under $10,000" },
           { value: "10-50k", label: "$10,000 – $50,000" },
           { value: "50-200k", label: "$50,000 – $200,000" },
           { value: "gt-200k", label: "Over $200,000" },
+          { value: "undecided", label: "Not yet decided / want to discuss the budget" },
         ],
       },
     ],

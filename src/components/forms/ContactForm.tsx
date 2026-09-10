@@ -21,46 +21,52 @@ import type { FieldDef, FlowValues } from "./types";
  * surfaces stay consistent without sharing an interaction model.
  */
 
-const FIELDS: FieldDef[] = [
-  {
-    kind: "text",
-    name: "name",
-    label: "Full name",
-    autoComplete: "name",
-    validate: fullName,
-  },
-  {
-    kind: "text",
-    name: "email",
-    type: "email",
-    label: "Work email",
-    example: "you@organisation.com",
-    autoComplete: "email",
-    validate: email,
-  },
-  {
-    kind: "text",
-    name: "company",
-    label: "Company or institution",
-    autoComplete: "organization",
-    help: "Optional. Skip it if your email already says it.",
-    emptyLabel: "Not given",
-  },
-  {
-    kind: "textarea",
-    name: "message",
-    label: "What do you need help with?",
-    rows: 5,
-    maxLength: 1200,
-    validate: minLength(
-      15,
-      "Tell us what you are after, even in a line.",
-      "A sentence or two, so we know who should reply.",
-    ),
-  },
-];
+function buildFields(compact: boolean): FieldDef[] {
+  return [
+    {
+      kind: "text",
+      name: "name",
+      label: "Full name",
+      autoComplete: "name",
+      validate: fullName,
+    },
+    {
+      kind: "text",
+      name: "email",
+      type: "email",
+      label: "Work email",
+      example: "you@organisation.com",
+      autoComplete: "email",
+      validate: email,
+    },
+    {
+      kind: "text",
+      name: "company",
+      label: "Company or institution",
+      autoComplete: "organization",
+      help: "Optional. Skip it if your email already says it.",
+      emptyLabel: "Not given",
+    },
+    {
+      kind: "textarea",
+      name: "message",
+      label: "What do you need help with?",
+      // Shorter in the slide-out panel: the panel is a fixed-height overlay
+      // rather than a full page, and this is the field most likely to push
+      // the submit button below the fold on a laptop screen.
+      rows: compact ? 3 : 5,
+      maxLength: 1200,
+      validate: minLength(
+        15,
+        "Tell us what you are after, even in a line.",
+        "A sentence or two, so we know who should reply.",
+      ),
+    },
+  ];
+}
 
-export function ContactForm() {
+export function ContactForm({ compact = false }: { compact?: boolean }) {
+  const FIELDS = buildFields(compact);
   const reduced = useReducedMotion();
   const [values, setValues] = useState<FlowValues>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -136,7 +142,7 @@ export function ContactForm() {
     return (
       <motion.div
         role="status"
-        className="border p-8 md:p-10"
+        className={compact ? "border p-6" : "border p-8 md:p-10"}
         style={{ borderColor: "var(--border)", background: "var(--surface-muted)" }}
         initial={reduced ? undefined : { opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -157,7 +163,7 @@ export function ContactForm() {
 
   return (
     <form ref={formRef} onSubmit={onSubmit} noValidate className="max-w-xl">
-      <div className="flex flex-col gap-6">
+      <div className={compact ? "flex flex-col gap-4" : "flex flex-col gap-6"}>
         {FIELDS.map((field) =>
           field.kind === "textarea" ? (
             <TextAreaField
@@ -192,7 +198,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={sending}
-        className="mt-8 inline-flex items-center gap-2 px-6 py-3.5 font-display text-sm font-semibold text-white transition-[background-color,transform,opacity] duration-200 [transition-timing-function:var(--ease-out-strong)] active:scale-[0.97] disabled:opacity-70"
+        className={`${compact ? "mt-5" : "mt-8"} inline-flex items-center gap-2 px-6 py-3.5 font-display text-sm font-semibold text-white transition-[background-color,transform,opacity] duration-200 [transition-timing-function:var(--ease-out-strong)] active:scale-[0.97] disabled:opacity-70`}
         style={{ background: "var(--brand-accent)", borderRadius: "var(--radius-control)" }}
       >
         {sending ? "Sending…" : "Send message"}

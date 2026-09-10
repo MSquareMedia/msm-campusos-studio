@@ -7,7 +7,9 @@
  * deliver or how fast.
  */
 export const audit = {
-  metaTitle: "Request a free marketing audit | SOTAPO",
+  // No manual "| SOTAPO" suffix here, the root layout's title template
+  // already appends it, and doing both doubled up as "... | SOTAPO | SOTAPO".
+  metaTitle: "Request a free marketing audit",
   metaDescription:
     "Answer seven questions about your industry, goals, the services you are weighing up, budget and bottleneck, and the SOTAPO team will review where your marketing is losing people.",
   hero: {

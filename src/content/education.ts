@@ -457,71 +457,13 @@ export const education: IndustryContent = {
       // HARD RULE: do not add a person here until that person actually holds
       // the role, the biography is verified, and the photograph is theirs.
       // Never reuse another team member's photograph for a service head.
+      //
+      // A prior version of this array shipped seven invented people with
+      // fabricated bios and stock photos, added for a pre-launch preview and
+      // never replaced. Removed: presenting fabricated staff as real is a
+      // misrepresentation regardless of how the build got there.
       // ---------------------------------------------------------------
-      // ⚠️ PLACEHOLDER PEOPLE, NOT REAL EMPLOYEES. ⚠️
-      //
-      // Added at the client's explicit request for the pre-launch preview
-      // build, to show the shape of a staffed bench. Every name, biography and
-      // tenure below is INVENTED. Nobody listed here works for MSM CampusOS.
-      //
-      // These must be replaced with real heads, or removed entirely, before
-      // this site is public. Presenting fabricated staff to prospective
-      // clients, students or candidates is a misrepresentation, and the fact
-      // that the biographies read plausibly is exactly what makes it one.
-      //
-      // UPDATE: `photo` is now set on every entry below, at the client's
-      // explicit direction ("use stock photos of people for service heads").
-      // This reverses the earlier stance in this file (a fabricated name
-      // attached to a real person's face reads as more real than a name
-      // alone), flagged here so the tradeoff is visible, not silently
-      // dropped. Every photo is a generic stock headshot (Unsplash license,
-      // no attribution required), not a photo of an actual MSM CampusOS
-      // employee. The obligation to replace or remove this entire block
-      // before public launch is unchanged and, if anything, more urgent now.
-      members: [
-        {
-          name: "Ananya Krishnan",
-          role: "Performance Media Head",
-          bio: "PLACEHOLDER. Invented profile: eleven years in paid acquisition across search and social, previously running enrolment media for a multi-campus university group.",
-          photo: "/images/education/team/service-heads-placeholder/ananya-krishnan.jpg",
-        },
-        {
-          name: "Tobias Lindqvist",
-          role: "SEO Head",
-          bio: "PLACEHOLDER. Invented profile: organic search and AI-answer visibility, with a background in technical SEO for large multilingual course catalogues.",
-          photo: "/images/education/team/service-heads-placeholder/tobias-lindqvist.jpg",
-        },
-        {
-          name: "Farah Siddiqui",
-          role: "Social Media Head",
-          bio: "PLACEHOLDER. Invented profile: community and creator strategy, focused on the platforms prospective students actually spend their time on.",
-          photo: "/images/education/team/service-heads-placeholder/farah-siddiqui.jpg",
-        },
-        {
-          name: "Daniel Okonjo",
-          role: "Content Head",
-          bio: "PLACEHOLDER. Invented profile: editorial lead across long-form, scripts and thought leadership for education and public-sector clients.",
-          photo: "/images/education/team/service-heads-placeholder/daniel-okonjo.jpg",
-        },
-        {
-          name: "Mei-Ling Chen",
-          role: "Creative Studio Head",
-          bio: "PLACEHOLDER. Invented profile: art direction and motion, previously building in-house studios for consumer and education brands.",
-          photo: "/images/education/team/service-heads-placeholder/mei-ling-chen.jpg",
-        },
-        {
-          name: "Rohan Bhattacharya",
-          role: "Web Head",
-          bio: "PLACEHOLDER. Invented profile: front-end and conversion engineering for institutional sites and high-volume campaign landing pages.",
-          photo: "/images/education/team/service-heads-placeholder/rohan-bhattacharya.jpg",
-        },
-        {
-          name: "Priya Raghunathan",
-          role: "Analytics Head",
-          bio: "PLACEHOLDER. Invented profile: measurement design and attribution, with a focus on tracking enquiries through to admission rather than to form fill.",
-          photo: "/images/education/team/service-heads-placeholder/priya-raghunathan.jpg",
-        },
-      ],
+      members: [],
 
       // Seat titles and scope only. Every `scope` string below is lifted
       // verbatim from this file's `modernServices.items` descriptions, so this

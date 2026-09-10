@@ -81,7 +81,13 @@ export function ContactRail() {
               role="dialog"
               aria-modal="true"
               aria-label="Contact SOTAPO"
-              className="fixed inset-y-0 right-0 z-[71] flex w-full max-w-md flex-col overflow-y-auto bg-[var(--surface)] p-8 shadow-[-20px_0_60px_rgba(0,0,0,0.22)] md:p-10"
+              // data-lenis-prevent: the site's smooth-scroll library hijacks
+              // wheel events on the whole document by default, including
+              // over this fixed overlay, so a trackpad scroll here did
+              // nothing and only a manual scrollbar drag worked. This opts
+              // the panel out of Lenis so native scrolling takes it back.
+              data-lenis-prevent
+              className="fixed inset-y-0 right-0 z-[71] flex w-full max-w-md flex-col overflow-y-auto bg-[var(--surface)] p-6 shadow-[-20px_0_60px_rgba(0,0,0,0.22)] md:p-8"
               initial={reduced ? undefined : { x: "100%" }}
               animate={{ x: 0 }}
               exit={reduced ? undefined : { x: "100%" }}
@@ -92,7 +98,7 @@ export function ContactRail() {
                   <p className="eyebrow" style={{ color: "var(--brand-accent)" }}>
                     SOTAPO
                   </p>
-                  <h2 className="font-display mt-2 text-2xl font-bold leading-[1.1] md:text-3xl">
+                  <h2 className="font-display mt-1.5 text-xl font-bold leading-[1.1] md:text-2xl">
                     Start a conversation.
                   </h2>
                 </div>
@@ -106,12 +112,12 @@ export function ContactRail() {
                 </button>
               </div>
 
-              <p className="mt-4 text-[var(--text-muted)]">
+              <p className="mt-2 text-sm text-[var(--text-muted)]">
                 Tell us who you are and what you need. One screen, no questionnaire.
               </p>
 
-              <div className="mt-8">
-                <ContactForm />
+              <div className="mt-5">
+                <ContactForm compact />
               </div>
             </motion.div>
           </>
