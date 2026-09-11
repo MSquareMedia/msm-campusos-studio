@@ -1,0 +1,8 @@
+# =============================================================================
+# Trivy Vulnerability Ignore List
+#
+# Add CVE IDs here (one per line) to suppress known or accepted findings.
+# Example:
+#   CVE-2023-12345
+#   GHSA-xxxx-xxxx-xxxx
+# =============================================================================

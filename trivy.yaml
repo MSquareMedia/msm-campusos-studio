@@ -1,0 +1,20 @@
+# =============================================================================
+# Trivy Configuration for MSM CampusOS Studio
+# =============================================================================
+
+scan:
+  scanners:
+    - vuln
+    - misconfig
+
+vulnerability:
+  type:
+    - os
+    - library
+  ignore-unfixed: true
+
+severity:
+  - HIGH
+  - CRITICAL
+
+ignorefile: .trivyignore

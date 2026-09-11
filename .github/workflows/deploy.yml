@@ -86,6 +86,47 @@ jobs:
         run: npm run lint
 
   # ─────────────────────────────────────────────────────────────────────────
+  # SECURITY SCAN 1 — Gitleaks (Secret Detection)
+  # Runs in parallel with Lint; non-blocking for production deployment.
+  # ─────────────────────────────────────────────────────────────────────────
+  gitleaks:
+    name: 🔑 Gitleaks (Secrets)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks secret scanner
+        uses: gitleaks/gitleaks-action@v2
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # SECURITY SCAN 2 — Trivy (Vulnerability & Misconfiguration Scanner)
+  # Runs in parallel with Lint; non-blocking for production deployment.
+  # ─────────────────────────────────────────────────────────────────────────
+  trivy:
+    name: 🛡️ Trivy (Vulnerabilities)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        continue-on-error: true
+        with:
+          scan-type: "fs"
+          ignore-unfixed: true
+          format: "table"
+          severity: "CRITICAL,HIGH"
+          trivyignores: ".trivyignore"
+
+  # ─────────────────────────────────────────────────────────────────────────
   # JOB 2 — Build & Push Docker image to GHCR
   # ─────────────────────────────────────────────────────────────────────────
   build:

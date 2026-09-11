@@ -1,0 +1,33 @@
+# =============================================================================
+# Gitleaks Configuration for MSM CampusOS Studio
+# =============================================================================
+
+title = "MSM CampusOS Studio Gitleaks Rules"
+
+[allowlist]
+description = "Global allowlist for documentation, test mocks, lockfiles, and environment templates"
+
+# Paths to exclude from secret scanning
+paths = [
+  '''^\.env\.example$''',
+  '''^docs/.*''',
+  '''^.*\.md$''',
+  '''^package-lock\.json$''',
+  '''^node_modules/.*''',
+  '''^\.next/.*''',
+  '''^public/.*''',
+  '''^scripts/test-zoho\.mjs$'''
+]
+
+# Patterns for mock and placeholder tokens
+regexes = [
+  '''sk-ant-x+''',
+  '''AXx+''',
+  '''1000\.x+''',
+  '''ghp_x+''',
+  '''x{10,}''',
+  '''YOUR_.*''',
+  '''example\.com''',
+  '''yourdomain\.com''',
+  '''devpassword'''
+]
