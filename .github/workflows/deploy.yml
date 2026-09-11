@@ -25,6 +25,12 @@
 #   ANTHROPIC_API_KEY       Anthropic SDK key
 #   UPSTASH_REDIS_REST_URL  Upstash Redis REST endpoint
 #   UPSTASH_REDIS_REST_TOKEN Upstash Redis token
+#   ADMIN_PASSWORD          Password for /admin route protection
+#   ZOHO_CLIENT_ID          Zoho OAuth Client ID
+#   ZOHO_CLIENT_SECRET      Zoho OAuth Client Secret
+#   ZOHO_REFRESH_TOKEN      Zoho OAuth Refresh Token
+#   ZOHO_ACCOUNTS_DOMAIN    Zoho Accounts Domain (e.g. https://accounts.zoho.in)
+#   ZOHO_API_DOMAIN         Zoho API Domain (e.g. https://www.zohoapis.in)
 #
 #   # ── Build-time NEXT_PUBLIC_* vars (baked into the JS bundle) ─────────
 #   NEXT_PUBLIC_APP_URL     e.g. https://yourdomain.com
@@ -248,6 +254,7 @@ jobs:
                 -e ANTHROPIC_API_KEY="${{ secrets.ANTHROPIC_API_KEY }}" \
                 -e UPSTASH_REDIS_REST_URL="${{ secrets.UPSTASH_REDIS_REST_URL }}" \
                 -e UPSTASH_REDIS_REST_TOKEN="${{ secrets.UPSTASH_REDIS_REST_TOKEN }}" \
+                -e ADMIN_PASSWORD="${{ secrets.ADMIN_PASSWORD }}" \
                 -e ZOHO_CLIENT_ID="${{ secrets.ZOHO_CLIENT_ID }}" \
                 -e ZOHO_CLIENT_SECRET="${{ secrets.ZOHO_CLIENT_SECRET }}" \
                 -e ZOHO_REFRESH_TOKEN="${{ secrets.ZOHO_REFRESH_TOKEN }}" \
