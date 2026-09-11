@@ -248,6 +248,12 @@ jobs:
                 -e ANTHROPIC_API_KEY="${{ secrets.ANTHROPIC_API_KEY }}" \
                 -e UPSTASH_REDIS_REST_URL="${{ secrets.UPSTASH_REDIS_REST_URL }}" \
                 -e UPSTASH_REDIS_REST_TOKEN="${{ secrets.UPSTASH_REDIS_REST_TOKEN }}" \
+                -e ZOHO_CLIENT_ID="${{ secrets.ZOHO_CLIENT_ID }}" \
+                -e ZOHO_CLIENT_SECRET="${{ secrets.ZOHO_CLIENT_SECRET }}" \
+                -e ZOHO_REFRESH_TOKEN="${{ secrets.ZOHO_REFRESH_TOKEN }}" \
+                -e ZOHO_ACCOUNTS_DOMAIN="${{ secrets.ZOHO_ACCOUNTS_DOMAIN }}" \
+                -e ZOHO_API_DOMAIN="${{ secrets.ZOHO_API_DOMAIN }}" \
+                -e ZOHO_WEBHOOK_URL="${{ secrets.ZOHO_WEBHOOK_URL }}" \
                 "$IMAGE"
             }
 
