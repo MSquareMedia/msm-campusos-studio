@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { neon } from '@neondatabase/serverless'
+import { sql, isConfigured } from '@/lib/db'
 
 /**
  * GET /api/health
@@ -17,10 +17,10 @@ import { neon } from '@neondatabase/serverless'
 export async function GET() {
   let db = 'unavailable'
 
-  if (process.env.DATABASE_URL) {
+  if (isConfigured()) {
     try {
-      const sql = neon(process.env.DATABASE_URL)
-      await sql`SELECT 1`
+      const q = sql()
+      await q`SELECT 1`
       db = 'connected'
     } catch (err) {
       // DB is down but we still report the app as healthy

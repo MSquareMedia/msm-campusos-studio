@@ -1,0 +1,51 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: campusos-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-campusos_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-campusos_password}
+      POSTGRES_DB: ${POSTGRES_DB:-campusos_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-campusos_user} -d ${POSTGRES_DB:-campusos_db}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+        NEXT_PUBLIC_SITE_NAME: ${NEXT_PUBLIC_SITE_NAME:-MSM CampusOS Studio}
+    container_name: campusos-studio
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-campusos_user}:${POSTGRES_PASSWORD:-campusos_password}@db:5432/${POSTGRES_DB:-campusos_db}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      UPSTASH_REDIS_REST_URL: ${UPSTASH_REDIS_REST_URL:-}
+      UPSTASH_REDIS_REST_TOKEN: ${UPSTASH_REDIS_REST_TOKEN:-}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      # Zoho CRM integration
+      ZOHO_CLIENT_ID: ${ZOHO_CLIENT_ID:-}
+      ZOHO_CLIENT_SECRET: ${ZOHO_CLIENT_SECRET:-}
+      ZOHO_REFRESH_TOKEN: ${ZOHO_REFRESH_TOKEN:-}
+      ZOHO_ACCOUNTS_DOMAIN: ${ZOHO_ACCOUNTS_DOMAIN:-https://accounts.zoho.com}
+      ZOHO_API_DOMAIN: ${ZOHO_API_DOMAIN:-https://www.zohoapis.com}
+      ZOHO_WEBHOOK_URL: ${ZOHO_WEBHOOK_URL:-}
+
+volumes:
+  postgres_data:

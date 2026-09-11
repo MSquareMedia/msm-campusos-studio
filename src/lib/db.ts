@@ -1,8 +1,10 @@
 import "server-only";
 import { neon } from "@neondatabase/serverless";
+import postgres from "postgres";
 
 /**
- * Submission storage, backed by the Vercel Postgres (Neon) integration.
+ * Submission storage, supporting both Neon serverless Postgres and
+ * standard PostgreSQL (e.g. Docker Compose, self-hosted, AWS RDS).
  *
  * The connection string is read at call time rather than module scope so the
  * site still builds and renders with no database attached: every page here is
@@ -20,8 +22,6 @@ export type Submission = {
 };
 
 function connectionString(): string | undefined {
-  // Vercel's Postgres/Neon integration injects several aliases depending on
-  // how the store was attached; accept whichever is present.
   return (
     process.env.DATABASE_URL ??
     process.env.POSTGRES_URL ??
@@ -34,12 +34,30 @@ export function isConfigured(): boolean {
   return Boolean(connectionString());
 }
 
-/** Shared Neon client accessor, other tables (see case-studies-db.ts) reuse
- *  this instead of re-reading the connection string themselves. */
+let pgSql: ReturnType<typeof postgres> | null = null;
+
+/**
+ * Shared Postgres client accessor. Automatically detects whether to use
+ * Neon's HTTP serverless client (for *.neon.tech URLs) or standard TCP
+ * driver (for Docker Compose and standard PostgreSQL).
+ */
 export function sql() {
   const url = connectionString();
   if (!url) throw new Error("No database connection string configured.");
-  return neon(url);
+
+  if (url.includes("neon.tech")) {
+    return neon(url);
+  }
+
+  if (!pgSql) {
+    pgSql = postgres(url, {
+      max: 10,
+      idle_timeout: 20,
+      connect_timeout: 10,
+      ssl: url.includes("sslmode=require") ? "require" : false,
+    });
+  }
+  return pgSql;
 }
 
 /**
