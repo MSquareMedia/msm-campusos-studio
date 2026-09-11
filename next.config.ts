@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
   // directory that the runner stage copies into the minimal Alpine image.
   output: "standalone",
 
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
+  },
+
   async redirects() {
     return [
       { source: "/campusos/about", destination: "/about", permanent: true },

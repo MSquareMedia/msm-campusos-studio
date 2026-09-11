@@ -42,8 +42,8 @@ export function TextReveal({
           <span key={`${i}-${line}`} className="block overflow-hidden pb-[0.12em] -mb-[0.12em]">
             <motion.span
               className="block"
-              initial={reduced ? undefined : { y: "110%" }}
-              animate={show && !reduced ? { y: "0%" } : undefined}
+              initial={reduced || onMount ? undefined : { y: "110%" }}
+              animate={show && !reduced && !onMount ? { y: "0%" } : undefined}
               transition={{
                 duration: 0.75,
                 delay: delay + i * 0.075,
@@ -84,7 +84,7 @@ export function FadeUp({
   return (
     <motion.div
       className={className}
-      initial={reduced ? undefined : { opacity: 0, y }}
+      initial={reduced || onMount ? undefined : { opacity: 0, y }}
       animate={onMount && !reduced ? target : undefined}
       whileInView={onMount || reduced ? undefined : target}
       viewport={onMount ? undefined : { once: true, amount: 0.25 }}

@@ -4,9 +4,8 @@ import Script from "next/script";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { OSiQChat } from "@/components/osiq/OSiQChat";
 import { ContactRail } from "@/components/layout/ContactRail";
+import { ClientWidgets } from "@/components/layout/ClientWidgets";
 import { organizationJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/lib/site-config";
 
@@ -14,12 +13,14 @@ const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -50,7 +51,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
         />
-        <SmoothScroll />
         <div className="grain-overlay" aria-hidden="true" />
         <Header />
         <main id="main-content" className="flex-1">
@@ -58,7 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <ContactRail />
-        <OSiQChat />
+        <ClientWidgets />
       </body>
     </html>
   );

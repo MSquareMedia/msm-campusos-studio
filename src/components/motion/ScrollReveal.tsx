@@ -47,9 +47,9 @@ export function ScrollReveal({
       <motion.div
         ref={ref}
         className={`relative overflow-hidden ${frameClassName}`}
-        initial={reduced ? undefined : { clipPath: "inset(0 0 100% 0)" }}
-        animate={inView && !reduced ? { clipPath: "inset(0 0 0% 0)" } : undefined}
-        transition={{ duration: 1.05, ease: [0.77, 0, 0.175, 1] }}
+        initial={reduced || priority ? undefined : { clipPath: "inset(0 0 100% 0)" }}
+        animate={inView && !reduced && !priority ? { clipPath: "inset(0 0 0% 0)" } : undefined}
+        transition={{ duration: 0.8, ease: [0.77, 0, 0.175, 1] }}
       >
         <motion.div className="relative h-full w-full" style={reduced ? undefined : { y }}>
           <Image
