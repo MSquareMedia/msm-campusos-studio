@@ -85,7 +85,7 @@ export default function AboutPage() {
             as="h1"
             onMount
             lines={toLines(about.statement.line)}
-            className="font-display max-w-[18ch] text-[clamp(2.5rem,8vw,3.5rem)] font-extrabold leading-[1.0] tracking-tight md:text-7xl"
+            className="font-display max-w-[18ch] text-5xl font-extrabold leading-[1.0] tracking-tight md:text-7xl"
           />
           <FadeUp delay={0.25} onMount>
             <p className="mt-10 max-w-xl text-lg leading-relaxed text-[var(--text-muted)] md:ml-auto md:text-xl">
@@ -105,7 +105,7 @@ export default function AboutPage() {
           frameClassName="h-[52vh] w-full md:h-[74vh]"
         />
         <div className="container-page">
-          <p className="mt-4 text-xs text-[var(--text-muted)]">
+          <p className="mt-4 text-sm text-[var(--text-muted)]">
             Photography by Dayne Topkin, via Wikimedia Commons (CC0).
           </p>
         </div>
@@ -117,7 +117,7 @@ export default function AboutPage() {
           <ChapterMark numeral={about.chapters.origin.numeral} label={about.chapters.origin.label} />
           <TextReveal
             lines={toLines(education.pov.heading)}
-            className="font-display mt-8 max-w-[16ch] text-3xl font-bold leading-[1.04] md:text-6xl"
+            className="font-display mt-8 max-w-[16ch] text-3xl font-bold leading-[1.04] md:text-5xl"
           />
           <div className="mt-10 flex max-w-2xl flex-col gap-6 md:ml-auto">
             {education.pov.body.map((paragraph, i) => (
@@ -177,7 +177,7 @@ export default function AboutPage() {
                           </div>
                         ) : (
                           <div
-                            className="font-display flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-base font-bold"
+                            className="font-display flex h-16 w-16 shrink-0 items-center justify-center rounded-full text-sm font-bold"
                             style={{
                               background: "var(--surface-inverse)",
                               color: "var(--brand-accent)",
@@ -243,13 +243,13 @@ export default function AboutPage() {
                         )}
                       </div>
                       <div className="md:flex-1">
-                        <h3 className="font-display text-2xl font-bold md:text-4xl">
+                        <h3 className="font-display text-2xl font-bold md:text-3xl">
                           {member.name}
                         </h3>
                         <p className="font-display mt-1 text-sm font-semibold text-[var(--text-muted)]">
                           {member.role}
                         </p>
-                        <p className="mt-5 max-w-md text-base leading-relaxed text-[var(--text-muted)]">
+                        <p className="mt-5 max-w-md text-lg leading-relaxed text-[var(--text-muted)]">
                           {member.bio}
                         </p>
                       </div>
@@ -284,7 +284,7 @@ export default function AboutPage() {
           />
           <TextReveal
             lines={toLines(about.chapters.standard.heading)}
-            className="font-display mt-8 max-w-[18ch] text-3xl font-bold leading-[1.04] md:text-6xl"
+            className="font-display mt-8 max-w-[18ch] text-3xl font-bold leading-[1.04] md:text-5xl"
           />
           <FadeUp delay={0.12}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-[var(--text-muted)] md:text-xl">
@@ -299,7 +299,7 @@ export default function AboutPage() {
                   y={10}
                   delay={i * 0.05}
                 >
-                  <span className="font-display text-2xl font-bold md:text-4xl">{group.title}</span>
+                  <span className="font-display text-2xl font-bold md:text-3xl">{group.title}</span>
                 </FadeUp>
               </li>
             ))}
