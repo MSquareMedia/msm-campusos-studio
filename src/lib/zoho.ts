@@ -60,6 +60,77 @@ function splitName(fullName: string | undefined): { firstName: string; lastName:
 }
 
 /**
+ * Generates intelligent tags for the Zoho CRM Leads module.
+ * Zoho CRM renders these as colorful badges and enables 1-click filtering.
+ */
+function buildZohoTags(
+  kind: SubmissionKind,
+  payload: Record<string, string>
+): Array<{ name: string }> {
+  const tags = new Set<string>();
+
+  // 1. Source & Brand Tag
+  tags.add("CampusOS Studio");
+  tags.add("Website Inbound");
+
+  // 2. Specific Funnel / Intent Tag
+  if (kind === "contact") {
+    tags.add("Contact Us");
+    tags.add("High Intent");
+  } else if (kind === "audit") {
+    tags.add("Free Audit");
+    tags.add("Assessment");
+    tags.add("High Intent");
+  } else if (kind === "careers") {
+    tags.add("Careers");
+    if (payload.role) {
+      tags.add(`Role: ${payload.role.slice(0, 35)}`);
+    }
+  } else if (kind === "osiq") {
+    tags.add("OSiQ AI Assistant");
+    tags.add("AI Qualified");
+  }
+
+  // 3. Industry Tag
+  const rawIndustry = payload.industry?.toLowerCase()?.trim();
+  if (rawIndustry) {
+    if (rawIndustry.includes("edu")) tags.add("Education");
+    else if (rawIndustry.includes("auto")) tags.add("Automotive");
+    else if (rawIndustry.includes("health")) tags.add("Healthcare");
+    else if (rawIndustry.includes("real")) tags.add("Real Estate");
+    else tags.add(payload.industry.slice(0, 30));
+  }
+
+  // 4. Budget Tier Tag
+  const rawBudget = payload.budget?.trim();
+  if (rawBudget) {
+    if (rawBudget.includes("100") || rawBudget.toLowerCase().includes("over")) {
+      tags.add("Budget: $100k+");
+      tags.add("Enterprise Tier");
+    } else if (rawBudget.includes("50")) {
+      tags.add("Budget: $50k-$100k");
+    } else if (rawBudget.includes("25")) {
+      tags.add("Budget: $25k-$50k");
+    } else if (rawBudget.toLowerCase().includes("under")) {
+      tags.add("Budget: <$25k");
+    } else {
+      tags.add(`Budget: ${rawBudget.slice(0, 30)}`);
+    }
+  }
+
+  // 5. Primary Goal Tag
+  const rawGoal = payload.goal?.trim();
+  if (rawGoal && rawGoal.length < 30) {
+    tags.add(`Goal: ${rawGoal}`);
+  }
+
+  return Array.from(tags)
+    .filter((t) => t.length > 0)
+    .slice(0, 10)
+    .map((name) => ({ name }));
+}
+
+/**
  * Formats a submission payload into Zoho CRM Leads schema.
  */
 function buildZohoLead(
@@ -101,13 +172,31 @@ function buildZohoLead(
     }
   }
 
+  // Determine Lead Rating & Status
+  const rating =
+    kind === "contact" || kind === "audit" ? "Hot" : kind === "osiq" ? "Warm" : "Active";
+
   const lead: ZohoLeadPayload = {
     First_Name: firstName,
     Last_Name: lastName,
     Company: company,
     Lead_Source: leadSource,
+    Lead_Status: "Not Contacted",
+    Rating: rating,
+    Tag: buildZohoTags(kind, payload),
     Description: descriptionLines.join("\n"),
   };
+
+  // Map standard Zoho CRM Industry field if present
+  if (payload.industry) {
+    const indMap: Record<string, string> = {
+      education: "Education",
+      automotive: "Automotive",
+      healthcare: "Healthcare",
+      "real-estate": "Real Estate",
+    };
+    lead.Industry = indMap[payload.industry.toLowerCase()] || payload.industry;
+  }
 
   if (email) lead.Email = email;
   if (phone) lead.Phone = phone;
