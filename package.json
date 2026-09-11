@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "zoho:token": "node scripts/zoho-auth.mjs"
+    "zoho:token": "node scripts/zoho-auth.mjs",
+    "zoho:test": "node scripts/test-zoho.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.117.1",
