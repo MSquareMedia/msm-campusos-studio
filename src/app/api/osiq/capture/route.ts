@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { OSIQ_EXTRACT_PROMPT } from "@/lib/osiq-prompt";
 import { insertSubmission, isConfigured } from "@/lib/db";
+import { pushLeadToZoho, isZohoConfigured } from "@/lib/zoho";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,7 +10,7 @@ const FIELDS = ["name", "email", "organisation", "industry", "goal", "budget"] a
 
 /**
  * Pulls whatever qualification detail the conversation has surfaced and files
- * it against the same submissions table as the forms.
+ * it against the submissions table as well as Zoho CRM.
  *
  * Separate from the chat route on purpose: extraction must never delay a reply
  * the visitor is waiting on, and it runs on a much cheaper model. It is called
@@ -18,10 +19,8 @@ const FIELDS = ["name", "email", "organisation", "industry", "goal", "budget"] a
  */
 export async function POST(request: Request) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  // No key or no database means there is nothing useful to do. Return quietly
-  // rather than erroring: this is a background nicety, and a visitor mid-chat
-  // should never see a failure from it.
-  if (!apiKey || !isConfigured()) {
+  // No key or neither database nor Zoho configured means there is nothing useful to do.
+  if (!apiKey || (!isConfigured() && !isZohoConfigured())) {
     return Response.json({ ok: false, stored: false });
   }
 
@@ -90,10 +89,22 @@ export async function POST(request: Request) {
     }
 
     payload.transcript = transcript.slice(0, 4500);
-    await insertSubmission("osiq", payload);
+
+    if (isConfigured()) {
+      try {
+        await insertSubmission("osiq", payload);
+      } catch (dbErr) {
+        console.error("[osiq] capture database insert failed:", dbErr);
+      }
+    }
+
+    if (isZohoConfigured()) {
+      await pushLeadToZoho("osiq", payload);
+    }
+
     return Response.json({ ok: true, stored: true });
   } catch (error) {
-    console.error("osiq capture failed", error);
+    console.error("[osiq] capture failed:", error);
     return Response.json({ ok: false, stored: false });
   }
 }

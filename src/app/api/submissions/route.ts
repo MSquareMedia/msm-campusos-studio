@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { insertSubmission, isConfigured, type SubmissionKind } from "@/lib/db";
+import { pushLeadToZoho, isZohoConfigured } from "@/lib/zoho";
 import { rateLimit, clientIp } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
@@ -60,22 +61,38 @@ export async function POST(request: Request) {
     clean[key] = value;
   }
 
-  if (!isConfigured()) {
-    // No store attached yet. Report this honestly instead of returning a
-    // success the caller would show as "received", a form that silently
-    // discards what someone typed is worse than one that admits it is not
-    // live yet.
+  const dbReady = isConfigured();
+  const zohoReady = isZohoConfigured();
+
+  if (!dbReady && !zohoReady) {
+    // Neither database nor Zoho CRM is attached yet. Report this honestly
+    // instead of returning a success the caller would show as "received".
     return NextResponse.json(
       { error: "Submission storage is not configured yet.", code: "not_configured" },
       { status: 503 }
     );
   }
 
-  try {
-    await insertSubmission(kind as SubmissionKind, clean);
-    return NextResponse.json({ ok: true }, { status: 201 });
-  } catch (error) {
-    console.error("submission insert failed", error);
-    return NextResponse.json({ error: "Could not save submission." }, { status: 500 });
+  let dbSaved = false;
+  if (dbReady) {
+    try {
+      await insertSubmission(kind as SubmissionKind, clean);
+      dbSaved = true;
+    } catch (error) {
+      console.error("[submissions] Database insert failed:", error);
+    }
   }
+
+  let zohoPushed = false;
+  if (zohoReady) {
+    const zohoResult = await pushLeadToZoho(kind as SubmissionKind, clean);
+    zohoPushed = zohoResult.success;
+  }
+
+  // If at least one destination received the submission, report success.
+  if (dbSaved || zohoPushed) {
+    return NextResponse.json({ ok: true }, { status: 201 });
+  }
+
+  return NextResponse.json({ error: "Could not save submission." }, { status: 500 });
 }
