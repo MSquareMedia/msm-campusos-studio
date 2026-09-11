@@ -199,8 +199,43 @@ function buildZohoLead(
   }
 
   if (email) lead.Email = email;
-  if (phone) lead.Phone = phone;
-  if (website) lead.Website = website;
+  if (phone) {
+    lead.Phone = phone;
+    lead.Mobile = phone;
+  }
+  if (website) {
+    lead.Website = website;
+    lead.Web_Site_Url = website;
+  }
+
+  // Map Institution / University Name
+  const institution = payload.organisation || payload.organization || payload.company;
+  if (institution) {
+    lead.Institution_Name = institution;
+  }
+
+  // Map Career Designation / Position
+  if (payload.role) {
+    lead.Designation = payload.role;
+    lead.Position = payload.role;
+    lead.Job_Title = payload.role;
+  }
+
+  // Map Selected Services & Goals from Audit Assessment
+  if (payload.services) {
+    lead.Services_of_interest = payload.services;
+  }
+  if (payload.goal || payload.services) {
+    lead.Area_of_Interest = payload.goal || payload.services;
+  }
+
+  // Map Marketing Campaign Tracking (UTMs & Google Click ID)
+  if (payload.utm_source) lead.UTM_Source = payload.utm_source;
+  if (payload.utm_medium) lead.UTM_Medium = payload.utm_medium;
+  if (payload.utm_campaign) lead.UTM_Campaign = payload.utm_campaign;
+  if (payload.utm_term) lead.UTM_Term = payload.utm_term;
+  if (payload.utm_content) lead.UTM_Content = payload.utm_content;
+  if (payload.gclid) lead.GCLID = payload.gclid;
 
   return lead;
 }

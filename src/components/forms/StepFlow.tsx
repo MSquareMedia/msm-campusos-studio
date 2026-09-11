@@ -12,6 +12,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { ChoiceField, MultiChoiceField, TextAreaField, TextField } from "./Fields";
 import { isAutoAdvanceStep, parseMulti, type FlowValues, type StepDef } from "./types";
+import { getClientUtmParams } from "@/lib/utm";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -169,7 +170,10 @@ export function StepFlow({
       const response = await fetch("/api/submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ kind, payload: values }),
+        body: JSON.stringify({
+          kind,
+          payload: { ...getClientUtmParams(), ...values },
+        }),
       });
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));

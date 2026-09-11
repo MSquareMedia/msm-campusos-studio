@@ -6,6 +6,7 @@ import { CheckCircle, PaperPlaneTilt } from "@phosphor-icons/react";
 import { TextAreaField, TextField } from "./Fields";
 import { email, fullName, minLength } from "./validators";
 import type { FieldDef, FlowValues } from "./types";
+import { getClientUtmParams } from "@/lib/utm";
 
 /**
  * The contact form: one screen, five fields, one button.
@@ -116,7 +117,10 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
       const response = await fetch("/api/submissions", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ kind: "contact", payload: values }),
+        body: JSON.stringify({
+          kind: "contact",
+          payload: { ...getClientUtmParams(), ...values },
+        }),
       });
       if (!response.ok) {
         const data = await response.json().catch(() => ({}));
