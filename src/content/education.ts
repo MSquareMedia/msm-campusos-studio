@@ -228,9 +228,8 @@ export const education: IndustryContent = {
       { value: "14+", label: "Years in education marketing", sourceNote: "Core leadership team track record, MSM CampusOS India Edition briefing (2026)." },
       { value: "500+", label: "Institutions served", sourceNote: "Core leadership team track record, MSM CampusOS India Edition briefing (2026)." },
       { value: "6,000+", label: "Certified recruitment agents", sourceNote: "MSM Unify company-wide, active across 30+ source countries, MSM CampusOS India Edition briefing (2026)." },
-      { value: "800+", label: "Clients served (prior to MSM CampusOS)", sourceNote: "Delivered by MSM CampusOS's delivery leadership at a previous education-marketing business, before this platform; figures as reported by that team." },
-      { value: "₹750 Cr+", label: "Admission revenue driven for clients (prior to MSM CampusOS)", sourceNote: "Delivered by MSM CampusOS's delivery leadership at a previous education-marketing business, before this platform; figures as reported by that team." },
-      { value: "+40%", label: "Qualified-enquiry growth on pilot campuses", sourceNote: "Incremental enrolment uplift across pilot campuses, MSM CampusOS India Edition briefing (2026)." },
+      { value: "800+", label: "Clients served (prior to MSM CampusOS)", sourceNote: "Delivered by MSM CampusOS's delivery leadership at a previous education-marketing business, before this platform." },
+      { value: "₹750 Cr+", label: "Admission revenue driven for clients (prior to MSM CampusOS)", sourceNote: "Delivered by MSM CampusOS's delivery leadership at a previous education-marketing business, before this platform." },
     ],
   },
   proofLedger: {
@@ -388,8 +387,8 @@ export const education: IndustryContent = {
       },
       {
         name: "Mudit Kalia",
-        role: "AVP, MSM CampusOS",
-        bio: "14+ years building revenue engines across EdTech and media. Founding member, CollegeDekho Group. Conceived and launched aajtakcampus.com and ATCNAT, India's first national aptitude test for NEET/JEE aspirants, at India Today Group.",
+        role: "Business Head, MSM CampusOS",
+        bio: "15+ years building revenue engines across EdTech and media. Founding member, CollegeDekho Group. Conceived and launched aajtakcampus.com and ATCNAT, India's first national aptitude test for NEET/JEE aspirants, at India Today Group. Built institutional partnerships across universities, colleges, schools, EdTech companies, and test-prep providers, converting relationships into high-retention, long-term revenue.",
         photo: "/images/education/team/mudit-kalia.jpg",
       },
       {
