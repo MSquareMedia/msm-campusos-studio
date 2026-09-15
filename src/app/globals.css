@@ -393,7 +393,7 @@ button {
 .hero-logo-track {
   display: flex;
   width: max-content;
-  animation: hero-logo-scroll 46s linear infinite;
+  animation: hero-logo-scroll 62s linear infinite;
   will-change: transform;
 }
 

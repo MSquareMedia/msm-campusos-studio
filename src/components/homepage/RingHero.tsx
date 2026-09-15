@@ -45,14 +45,14 @@ export function RingHero({
       {logos.map((logo) => (
         <div
           key={`${logo.name}-${ariaHidden ? "dup" : "orig"}`}
-          className="hero-logo-mark flex h-11 shrink-0 items-center justify-center px-4 md:h-14 md:px-5"
+          className="hero-logo-mark flex h-16 shrink-0 items-center justify-center px-4 md:h-20 md:px-5"
         >
           <Image
             src={logo.src}
             alt={ariaHidden ? "" : logo.name}
             width={200}
             height={80}
-            className="h-7 w-auto object-contain md:h-9"
+            className="h-10 w-auto object-contain md:h-14"
           />
         </div>
       ))}
