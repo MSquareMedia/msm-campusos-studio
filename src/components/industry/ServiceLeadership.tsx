@@ -63,13 +63,19 @@ export function ServiceLeadership({
           // read at a glance suit it better than large portrait cards. Bio is
           // clamped to two lines at this density; the full line still lives
           // in the content file for anyone who wants it on hover/tap.
+          //
+          // Five to a row on desktop (three rows for the current 15-person
+          // roster) rather than eight: eight-wide left no room to show a full
+          // bio, so it clamped to two lines and relied on a hover/tap title
+          // attribute nobody actually finds. Five-wide gives each tile enough
+          // width to set the whole bio in readable type.
           <div
-            className="mt-16 grid grid-cols-3 gap-x-5 gap-y-10 border-t pt-12 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8"
+            className="mt-16 grid grid-cols-2 gap-x-6 gap-y-12 border-t pt-12 sm:grid-cols-3 md:grid-cols-5"
             style={{ borderColor: "var(--border)" }}
           >
             {members.map((member, i) => (
-              <FadeUp key={member.name} y={14} delay={(i % 8) * 0.04}>
-                <div className="group flex h-full flex-col" title={member.bio}>
+              <FadeUp key={member.name} y={14} delay={(i % 5) * 0.05}>
+                <div className="group flex h-full flex-col">
                   {member.photo ? (
                     <div
                       className="relative aspect-[4/5] w-full overflow-hidden"
@@ -79,7 +85,7 @@ export function ServiceLeadership({
                         src={member.photo}
                         alt={member.name}
                         fill
-                        sizes="(min-width: 1024px) 11vw, (min-width: 640px) 22vw, 30vw"
+                        sizes="(min-width: 768px) 18vw, (min-width: 640px) 30vw, 45vw"
                         className="object-cover transition-transform duration-[600ms] [transition-timing-function:var(--ease-out-strong)] group-hover:scale-[1.04]"
                       />
                     </div>
@@ -105,16 +111,16 @@ export function ServiceLeadership({
                       </span>
                     </div>
                   )}
-                  <h3 className="font-display mt-3 text-xs font-semibold leading-tight">
+                  <h3 className="font-display mt-3.5 text-sm font-semibold leading-tight">
                     {member.name}
                   </h3>
                   <p
-                    className="font-display text-[10px] font-semibold leading-tight"
+                    className="font-display mt-0.5 text-xs font-semibold leading-tight"
                     style={{ color: "var(--brand-accent)" }}
                   >
                     {member.role}
                   </p>
-                  <p className="mt-1.5 line-clamp-2 text-[10px] leading-snug text-[var(--text-muted)]">
+                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
                     {member.bio}
                   </p>
                 </div>

@@ -468,95 +468,100 @@ export const education: IndustryContent = {
       // comment above describes: they are the real bench, not seat-fillers
       // matched one-to-one against the modernServices catalogue.
       // ---------------------------------------------------------------
+      // Grouped by function rather than seniority, so the two PR people sit
+      // next to each other, the five design/video people run together, and
+      // so on, matching how a visitor actually scans "who owns what" rather
+      // than a flat alphabetical or org-chart order. 5-wide grid, 3 rows.
       members: [
         {
           name: "Arti V Srivastava",
           role: "Associate Director, PR and Corporate Communication",
-          bio: "Twelve years across agency and in-house communications, skilled in media strategy, executive positioning, and crisis communications. Builds relationships with editors and journalists across India, MENA, Europe, North America, Africa, and Australia.",
+          bio: "A storyteller at heart with a journalism background and twelve years across agency and in-house communications. Skilled in media strategy, executive positioning, crisis communications, and employee engagement, with a track record of turning complex business narratives into stories the press wants to tell. Works across markets spanning India, MENA, Europe, North America, Africa, and Australia, building relationships with editors and journalists in the international education and business press.",
           photo: "/images/education/team/arti-srivastava.jpg",
         },
         {
-          name: "Samrat",
-          role: "Associate Director, MSM CampusOS",
-          bio: "17+ years accelerating retail, B2B sales, and revenue growth across banking, fintech, and EdTech. A founding member of Ujjivan Small Finance Bank, skilled at architecting sales strategy and lasting customer relationships.",
-          photo: "/images/education/team/samrat.jpg",
-        },
-        {
-          name: "Himanshu Rai",
-          role: "Sr. Manager, Performance Marketing",
-          bio: "9+ years in performance marketing across Google Ads, Meta, and LinkedIn, specialising in lead generation, media planning, and CRO across EdTech, higher education, B2B, and B2C.",
-          photo: "/images/education/team/himanshu-rai.jpg",
-        },
-        {
-          name: "Sayantan Bhadra",
-          role: "Senior Manager, Social Media, MSM CampusOS",
-          bio: "9+ years across diverse sectors, partnering closely with clients to understand their goals and craft tailored strategies. Turns digital presence into lasting brand value and measurable business results.",
-          photo: "/images/education/team/sayantan-bhadra.jpg",
+          name: "Ananya Tandon",
+          role: "Executive, PR",
+          bio: "A communications professional with a degree in International Relations and Journalism, bringing a global lens to storytelling and strategy. Her career spans journalism, public relations, think tanks, and NGOs. She currently drives international PR and thought leadership for global education and student recruitment, crafting media narratives, event strategies, and content across Africa, South Asia, and North America.",
+          photo: "/images/education/team/ananya-tandon.jpg",
         },
         {
           name: "Amogh Mathur",
           role: "Manager, Design",
-          bio: "7+ years in visual design and communication, bridging client vision, creative strategy, and disciplined execution. Turns design, motion, and visual storytelling into lasting brand value and real business results.",
+          bio: "7+ years in visual design and communication, bridging the gap between client vision, creative strategy, and disciplined execution. Works through design, motion, and visual stories that turn digital presence into lasting brand value and real business results.",
           photo: "/images/education/team/amogh-mathur.jpg",
         },
         {
           name: "Manoj Rawat",
           role: "Senior Visual Artist",
-          bio: "12+ years in visual design and creative communication, spanning branding, digital campaigns, social media, advertising, and visual storytelling. Explores AI-powered creative tools to bring fresh, innovative solutions to every brief.",
+          bio: "12+ years in visual design and creative communication, specialising in transforming ideas into compelling visual experiences. Expertise spans branding, digital campaigns, social media, advertising, and visual storytelling, with a steady interest in exploring AI-powered creative tools to bring fresh ideas and innovative solutions to life.",
           photo: "/images/education/team/manoj-rawat.jpg",
         },
         {
           name: "Rakesh Chahar",
           role: "Graphic Designer & Brand Designer",
-          bio: "Graphic and brand designer focused on distinctive visual identities and meaningful brand communication, combining strategic thinking, creative problem-solving, and visual craftsmanship to turn ideas into memorable brand experiences.",
+          bio: "Focused on building distinctive visual identities and meaningful brand communication. Work combines strategic thinking, creative problem-solving, and visual craftsmanship to turn ideas into clear, compelling, and memorable brand experiences.",
           photo: "/images/education/team/rakesh-chahar.jpg",
-        },
-        {
-          name: "Angelina Sabharwal",
-          role: "Senior Executive, UX and Web Design, Brand and Marketing",
-          bio: "UI/UX designer focused on creating intuitive, user-friendly, and visually engaging digital experiences. Skilled in user-centred design, wireframing, prototyping, and crafting clean, meaningful interfaces.",
-          photo: "/images/education/team/angelina-sabharwal.jpg",
-        },
-        {
-          name: "Gauri Raina",
-          role: "Assistant Manager, Delivery, MSM CampusOS",
-          bio: "Focused on delivering meaningful, impactful work through creativity, collaboration, and a user-centric approach. Brings strong problem-solving skills and a steady interest in continuous learning and thoughtful, value-adding solutions.",
-          photo: "/images/education/team/gauri-raina.jpg",
-        },
-        {
-          name: "Ananya Tandon",
-          role: "Executive, PR",
-          bio: "Communications professional with a background in journalism and international relations. Drives international PR and thought leadership for global education and student recruitment across Africa, South Asia, and North America.",
-          photo: "/images/education/team/ananya-tandon.jpg",
-        },
-        {
-          name: "Ayush Bhatnagar",
-          role: "Executive, SEO, Brand and Marketing",
-          bio: "SEO and digital strategy professional with an MBA in International Business and Marketing. Works across SEO, AEO, GEO, website optimisation, and content strategy, using a data-driven approach to grow organic visibility.",
-          photo: "/images/education/team/ayush-bhatnagar.jpg",
-        },
-        {
-          name: "Aman Jha",
-          role: "Sr. SEO Executive",
-          bio: "Sr. SEO Executive with 4+ years driving organic growth and search visibility for education, technology, and e-commerce brands. Works across technical SEO, AI search, GMB optimisation, content strategy, and keyword research.",
-          photo: "/images/education/team/aman-jha.jpg",
-        },
-        {
-          name: "Yash Kumar",
-          role: "Senior Manager, Partnerships",
-          bio: "10+ years in partnerships, collaborations, and revenue growth across multiple sectors. Works closely with clients on strategic solutions that drive measurable outcomes, strengthen relationships, and build long-term value.",
-          photo: "/images/education/team/yash-kumar.jpg",
         },
         {
           name: "Sachet Jain",
           role: "AI Visual Artist & Video Editor",
-          bio: "AI visual artist and video editor specialising in polished visual content through AI, motion, and storytelling. Focused on turning ideas into clear, engaging, and professionally edited visual experiences.",
+          bio: "Specialises in creating polished visual content through AI, motion, storytelling, and professional video editing, focused on turning ideas into clear, engaging, and impactful visual experiences.",
           photo: "/images/education/team/sachet-jain.jpg",
         },
         {
           name: "Tahir Abbas Rizvi",
           role: "Video Processing Manager",
-          bio: "15+ years as a video processing manager, including close to eight years in Bollywood and entertainment with Wizcraft, working around the IIFA Awards. Leads and collaborates with creative teams on every project.",
+          bio: "A video processing manager and creative professional with 15+ years of experience, including close to eight years in the Bollywood and entertainment industry with Wizcraft, working around the IIFA Awards and travelling internationally for its productions. Brings that experience into every project, while also leading and collaborating with creative teams.",
+          photo: "/images/education/team/tahir-abbas-rizvi.jpg",
+        },
+        {
+          name: "Angelina Sabharwal",
+          role: "Senior Executive, UX and Web Design, Brand and Marketing",
+          bio: "A passionate UI/UX designer focused on creating intuitive, user-friendly, and visually engaging digital experiences. Skilled in user-centred design, wireframing, prototyping, and crafting clean, meaningful interfaces.",
+          photo: "/images/education/team/angelina-sabharwal.jpg",
+        },
+        {
+          name: "Aman Jha",
+          role: "Sr. SEO Executive",
+          bio: "4+ years of experience driving organic growth and improving search visibility for education, technology, and e-commerce brands. Experienced in SEO, AI SEO, Google Business Profile optimisation, content strategy, keyword research, technical SEO, GA4, and Google Tag Manager, developing data-driven strategies that optimise for both traditional and emerging AI search experiences.",
+          photo: "/images/education/team/aman-jha.jpg",
+        },
+        {
+          name: "Ayush Bhatnagar",
+          role: "Executive, SEO, Brand and Marketing",
+          bio: "An SEO and digital strategy professional with an MBA in International Business and Marketing. Works across SEO, website optimisation, content strategy, AEO, GEO, and digital performance, using a data-driven approach to strengthen online visibility and drive organic growth.",
+          photo: "/images/education/team/ayush-bhatnagar.jpg",
+        },
+        {
+          name: "Himanshu Rai",
+          role: "Sr. Manager, Performance Marketing",
+          bio: "A performance marketing professional with 9+ years of experience driving growth through data-led digital marketing strategies. Specialises in Google Ads, Meta, and LinkedIn, with strong expertise in lead generation, media planning, campaign optimisation, CRO, and performance analytics across EdTech, higher education, B2B, and B2C businesses.",
+          photo: "/images/education/team/himanshu-rai.jpg",
+        },
+        {
+          name: "Sayantan Bhadra",
+          role: "Senior Manager, Social Media, MSM CampusOS",
+          bio: "9+ years of experience across diverse sectors, partnering closely with clients to understand their goals and craft tailored strategies, turning digital presence into lasting brand value and real business results.",
+          photo: "/images/education/team/sayantan-bhadra.jpg",
+        },
+        {
+          name: "Samrat",
+          role: "Associate Director, MSM CampusOS",
+          bio: "17+ years in the market accelerating retail, B2B sales, and revenue growth across banking, fintech, and EdTech. Adept at architecting winning sales strategies and building lasting customer relationships. A founding member of Ujjivan Small Finance Bank.",
+          photo: "/images/education/team/samrat.jpg",
+        },
+        {
+          name: "Yash Kumar",
+          role: "Senior Manager, Partnerships",
+          bio: "Over 10 years of experience in partnerships, collaborations, and revenue growth across multiple sectors. Works closely with clients to understand their business objectives, challenges, and growth aspirations, developing strategic solutions that drive measurable outcomes and long-term value.",
+          photo: "/images/education/team/yash-kumar.jpg",
+        },
+        {
+          name: "Gauri Raina",
+          role: "Assistant Manager, Delivery, MSM CampusOS",
+          bio: "Focused on delivering meaningful and impactful work through creativity, collaboration, and a user-centric approach. Skilled in communication, problem-solving, and adapting to new challenges, with a strong interest in continuous learning, innovation, and creating thoughtful solutions that add value.",
+          photo: "/images/education/team/gauri-raina.jpg",
         },
       ],
 
