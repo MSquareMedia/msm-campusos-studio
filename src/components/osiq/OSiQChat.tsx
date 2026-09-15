@@ -240,7 +240,7 @@ export function OSiQChat() {
                       ? "Listening…"
                       : voice.speaking
                         ? "Speaking…"
-                        : "Marketing operating intelligence"}
+                        : "AI assistant · marketing operating intelligence"}
                 </p>
               </div>
               <button
@@ -439,6 +439,13 @@ export function OSiQChat() {
                 <ArrowUp size={17} weight="bold" />
               </button>
             </form>
+            {/* Standing AI disclosure, not just an aria-label: a visitor who
+                skips the launcher's accessible name should still see, in the
+                panel itself, that this is an automated assistant and that
+                what they type may be reviewed by the team. */}
+            <p className="border-t px-4 py-2 text-center text-[10px] text-[#9b958f]" style={{ borderColor: "rgba(26,26,26,0.1)" }}>
+              OSiQ is an AI assistant, not a person. Conversations may be reviewed by the SOTAPO team.
+            </p>
           </motion.div>
         )}
       </AnimatePresence>

@@ -117,7 +117,8 @@ export const footerLinks = {
     { label: "Careers", href: "/careers" },
   ],
   legal: [
-    { label: "Privacy policy", href: "https://www.msmunify.com/privacy-policy/" },
+    { label: "Privacy policy", href: "/privacy-policy" },
+    { label: "Cookie policy", href: "/cookie-policy" },
     { label: "Terms of use", href: "https://www.msmunify.com/terms-of-use/" },
   ],
 };
