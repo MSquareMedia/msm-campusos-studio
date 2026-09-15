@@ -973,20 +973,22 @@ export function ServiceMesh({
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  width: 96px;
-  height: 96px;
+  width: 104px;
+  height: 104px;
   justify-content: center;
   border-radius: 999px;
   color: var(--text);
   font-family: var(--font-display), system-ui, sans-serif;
-  font-size: 0.625rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 .mesh-${uid} .mesh-node-hub {
   max-width: none;
-  border-color: color-mix(in oklab, var(--brand-accent) 42%, transparent);
+  border-width: 1.5px;
+  border-color: var(--brand-accent);
+  background: var(--mesh-accent-wash);
 }
 .mesh-${uid} .mesh-node-hub .mesh-hub-icon { color: var(--brand-accent); }
 @media (hover: hover) and (pointer: fine) {
