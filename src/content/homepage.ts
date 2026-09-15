@@ -9,7 +9,7 @@ export const homepage = {
     eyebrow: "SOTAPO",
     headline: "We move what matters.",
     supportingCopy:
-      "For automotive, healthcare, real estate, and beyond, we're a growth agency: brand, demand, and revenue, all moving in the same direction. In education, we go further and become an operating partner, Sotapo Education, powered by MSM CampusOS.",
+      "For automotive, healthcare, real estate, and beyond, we're a growth agency: brand, demand, and revenue, all moving in the same direction. In education, we go further and become an operating partner, with a one-stop solution called MSM CampusOS, alongside the creative growth solutions native to the team at SOTAPO.",
   },
   statement: {
     // The idea a competitor can't lift: movement isn't only "up." Retires
@@ -21,7 +21,7 @@ export const homepage = {
   industriesIntro: {
     eyebrow: "Where we go deepest",
     heading: "One growth partner. One vertical where we run more than the marketing.",
-    body: "Education is where this team started, and it's the one place SOTAPO becomes an operating partner rather than only a marketing one, Sotapo Education, powered by MSM CampusOS. The other industries prove the same judgment travels.",
+    body: "Education is where this team started, and it's the one place SOTAPO becomes an operating partner rather than only a marketing one, with a one-stop solution called MSM CampusOS, alongside the creative growth solutions native to the team at SOTAPO. The other industries prove the same judgment travels.",
   },
   serviceUniverse: {
     heading: "Everything a modern marketing partner actually does",

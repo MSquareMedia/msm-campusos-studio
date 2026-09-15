@@ -29,10 +29,10 @@ export function Footer() {
             </div>
             <div className="mt-6 flex items-center gap-3">
               <a
-                href="https://www.linkedin.com/company/msm-campusos/"
+                href="https://www.linkedin.com/company/sotapohq"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="MSM CampusOS on LinkedIn"
+                aria-label="SOTAPO on LinkedIn"
                 className="flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
                 style={{ borderColor: "var(--border-inverse)", color: "var(--text-inverse-muted)" }}
               >

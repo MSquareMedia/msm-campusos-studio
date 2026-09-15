@@ -32,25 +32,27 @@ export function RingHero({
 }) {
   // Duplicated for the seamless -50% translate. The copy is aria-hidden so
   // screen readers do not hear every client name twice.
+  //
+  // No card, no plate: `logo.src` here already points at the pre-rendered
+  // monochrome asset (see buildHeroLogos in app/page.tsx), a real desaturate
+  // + levels pass baked into the file rather than a CSS filter, so a logo
+  // that is itself a filled badge or crest keeps its internal shading
+  // instead of collapsing into a flat block. Sits directly on the dark hero
+  // at reduced opacity, full opacity and its real colour on hover, the
+  // quiet-logo-wall treatment rather than a strip of white tiles.
   const marqueeSet = (ariaHidden: boolean) => (
     <div className="hero-logo-set" aria-hidden={ariaHidden || undefined}>
       {logos.map((logo) => (
-        // White card behind every mark. Against the dark hero, a bare logo
-        // with a transparent or colour-matched background loses its edges;
-        // the card gives every mark the same flat, legible plate regardless
-        // of what colour or shape it is. Every source asset is cropped tight
-        // to its own content first, so the card's own padding is the only
-        // padding in play.
         <div
           key={`${logo.name}-${ariaHidden ? "dup" : "orig"}`}
-          className="flex h-11 shrink-0 items-center justify-center rounded-lg bg-white px-4 md:h-14 md:px-5"
+          className="hero-logo-mark flex h-16 shrink-0 items-center justify-center px-4 md:h-20 md:px-5"
         >
           <Image
             src={logo.src}
             alt={ariaHidden ? "" : logo.name}
             width={200}
             height={80}
-            className="h-6 w-auto object-contain md:h-8"
+            className="h-10 w-auto object-contain md:h-14"
           />
         </div>
       ))}

@@ -382,7 +382,7 @@ export const education: IndustryContent = {
       {
         name: "Nikhil Sharda",
         role: "AVP, Brand & Marketing",
-        bio: "22+ years as a global award-winning marketing leader (Cannes Lions, Effie, EMVIES, Kyoorius Elephant, AMA Awards). Built and transformed brands including NEXA, ReNew, and Rajasthan Tourism across 40+ countries.",
+        bio: "22+ years as a global award-winning marketing leader (Cannes Lions, Effie, EMVIES, Kyoorius Elephant, AMA Awards). Built and transformed brands including NEXA, ReNew, and Rajasthan Tourism across 40+ countries worldwide.",
         photo: "/images/education/team/nikhil-sharda.jpg",
       },
       {
@@ -394,19 +394,19 @@ export const education: IndustryContent = {
       {
         name: "Mohsin Abbas",
         role: "Director, Delivery",
-        bio: "15+ years across digital marketing and EdTech, specialising in business operations and client success. Founding member of HTCampus.com, and nine years driving growth at a previous education-marketing business.",
+        bio: "15+ years across digital marketing and EdTech, specialising in business operations and client success. Founding member of HTCampus.com, and nine years driving growth at a previous education-marketing business before joining this platform.",
         photo: "/images/education/team/mohsin-abbas.jpg",
       },
       {
         name: "Rahul Khandelwal",
         role: "Founder, CGF, IIT Delhi",
-        bio: "IIT Delhi alumnus. Former Regional In-charge at Pratham, leading learning programmes across 15,000 government schools reaching 2.3 million students across five Indian states.",
+        bio: "IIT Delhi alumnus and former Regional In-charge at Pratham, where he led learning programmes across 15,000 government schools, reaching 2.3 million students across five Indian states through structured, outcome-driven delivery.",
         photo: "/images/education/team/rahul-khandelwal.jpg",
       },
       {
         name: "Dr. Nalin Jha",
         role: "Academic & EdTech Leader",
-        bio: "20+ years in higher education, EdTech, and academic strategy, working across universities and industry collaborations on digital transformation and employability.",
+        bio: "20+ years in higher education, EdTech, and academic strategy, working across universities and industry collaborations on curriculum design, digital transformation, and employability outcomes for students entering a fast-changing job market.",
         photo: "/images/education/team/nalin-jha.jpg",
       },
     ],
@@ -476,13 +476,13 @@ export const education: IndustryContent = {
         {
           name: "Arti V Srivastava",
           role: "Associate Director, PR and Corporate Communication",
-          bio: "A storyteller at heart with a journalism background and twelve years across agency and in-house communications. Skilled in media strategy, executive positioning, crisis communications, and employee engagement, with a track record of turning complex business narratives into stories the press wants to tell. Works across markets spanning India, MENA, Europe, North America, Africa, and Australia, building relationships with editors and journalists in the international education and business press.",
+          bio: "A storyteller at heart with a journalism background and twelve years across agency and in-house communications. Skilled in media strategy, executive positioning, and crisis communications, building relationships with editors across India, MENA, Europe, and beyond.",
           photo: "/images/education/team/arti-srivastava.jpg",
         },
         {
           name: "Ananya Tandon",
           role: "Executive, PR",
-          bio: "A communications professional with a degree in International Relations and Journalism, bringing a global lens to storytelling and strategy. Her career spans journalism, public relations, think tanks, and NGOs. She currently drives international PR and thought leadership for global education and student recruitment, crafting media narratives, event strategies, and content across Africa, South Asia, and North America.",
+          bio: "A communications professional with a background in journalism and international relations, bringing a global lens to storytelling and strategy. Drives international PR and thought leadership for global education and student recruitment across Africa, South Asia, and North America.",
           photo: "/images/education/team/ananya-tandon.jpg",
         },
         {
@@ -494,7 +494,7 @@ export const education: IndustryContent = {
         {
           name: "Manoj Rawat",
           role: "Senior Visual Artist",
-          bio: "12+ years in visual design and creative communication, specialising in transforming ideas into compelling visual experiences. Expertise spans branding, digital campaigns, social media, advertising, and visual storytelling, with a steady interest in exploring AI-powered creative tools to bring fresh ideas and innovative solutions to life.",
+          bio: "12+ years in visual design and creative communication, specialising in transforming ideas into compelling visual experiences. Expertise spans branding, digital campaigns, and advertising, with a steady interest in exploring AI-powered creative tools to bring fresh ideas to life.",
           photo: "/images/education/team/manoj-rawat.jpg",
         },
         {
@@ -506,25 +506,25 @@ export const education: IndustryContent = {
         {
           name: "Sachet Jain",
           role: "AI Visual Artist & Video Editor",
-          bio: "Specialises in creating polished visual content through AI, motion, storytelling, and professional video editing, focused on turning ideas into clear, engaging, and impactful visual experiences.",
+          bio: "Specialises in creating polished visual content through AI, motion, storytelling, and professional video editing, focused on turning ideas into clear, engaging, and impactful visual experiences across campaigns, social content, and brand films.",
           photo: "/images/education/team/sachet-jain.jpg",
         },
         {
           name: "Tahir Abbas Rizvi",
           role: "Video Processing Manager",
-          bio: "A video processing manager and creative professional with 15+ years of experience, including close to eight years in the Bollywood and entertainment industry with Wizcraft, working around the IIFA Awards and travelling internationally for its productions. Brings that experience into every project, while also leading and collaborating with creative teams.",
+          bio: "A video processing manager and creative professional with 15+ years of experience, including close to eight years in the Bollywood and entertainment industry with Wizcraft, working around the IIFA Awards and leading creative teams internationally.",
           photo: "/images/education/team/tahir-abbas-rizvi.jpg",
         },
         {
           name: "Angelina Sabharwal",
           role: "Senior Executive, UX and Web Design, Brand and Marketing",
-          bio: "A passionate UI/UX designer focused on creating intuitive, user-friendly, and visually engaging digital experiences. Skilled in user-centred design, wireframing, prototyping, and crafting clean, meaningful interfaces.",
+          bio: "A passionate UI/UX designer focused on creating intuitive, user-friendly, and visually engaging digital experiences. Skilled in user-centred design, wireframing, prototyping, and crafting clean, meaningful interfaces that hold up across devices.",
           photo: "/images/education/team/angelina-sabharwal.jpg",
         },
         {
           name: "Aman Jha",
           role: "Sr. SEO Executive",
-          bio: "4+ years of experience driving organic growth and improving search visibility for education, technology, and e-commerce brands. Experienced in SEO, AI SEO, Google Business Profile optimisation, content strategy, keyword research, technical SEO, GA4, and Google Tag Manager, developing data-driven strategies that optimise for both traditional and emerging AI search experiences.",
+          bio: "4+ years of experience driving organic growth and improving search visibility for education, technology, and e-commerce brands. Works across technical SEO, AI search, content strategy, and keyword research to grow qualified organic traffic.",
           photo: "/images/education/team/aman-jha.jpg",
         },
         {
@@ -536,7 +536,7 @@ export const education: IndustryContent = {
         {
           name: "Himanshu Rai",
           role: "Sr. Manager, Performance Marketing",
-          bio: "A performance marketing professional with 9+ years of experience driving growth through data-led digital marketing strategies. Specialises in Google Ads, Meta, and LinkedIn, with strong expertise in lead generation, media planning, campaign optimisation, CRO, and performance analytics across EdTech, higher education, B2B, and B2C businesses.",
+          bio: "A performance marketing professional with 9+ years of experience driving growth through data-led digital marketing strategies. Specialises in Google Ads, Meta, and LinkedIn, with strong expertise in lead generation, media planning, and campaign optimisation.",
           photo: "/images/education/team/himanshu-rai.jpg",
         },
         {

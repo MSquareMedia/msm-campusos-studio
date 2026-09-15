@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { Play, X } from "@phosphor-icons/react/dist/ssr";
+import { LinkedinLogo, Play, X } from "@phosphor-icons/react/dist/ssr";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { PlaceholderMedia } from "./PlaceholderMedia";
 import { primaryCta, secondaryCta } from "@/lib/site-config";
@@ -177,6 +177,20 @@ export function IndustryHero({
                 aria-hidden="true"
               />
               {eyebrow}
+              {/* MSM CampusOS's own LinkedIn, right where the eyebrow names
+                  it, the site's first and most prominent mention of it, the
+                  footer's LinkedIn icon is SOTAPO's own account instead. */}
+              {variant === "education" && (
+                <a
+                  href="https://www.linkedin.com/company/msm-campusos/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="MSM CampusOS on LinkedIn"
+                  className="text-white/70 transition-colors hover:text-white"
+                >
+                  <LinkedinLogo size={16} weight="fill" aria-hidden="true" />
+                </a>
+              )}
             </p>
           </FadeUp>
           <TextReveal
