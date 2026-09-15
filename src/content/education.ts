@@ -375,7 +375,7 @@ export const education: IndustryContent = {
   ],
 
   team: {
-    heading: "The people behind MSM CampusOS",
+    heading: "The people behind SOTAPO",
     intro:
       "Growth, brand, academic systems, delivery, and faculty design. One bench, already doing this in India at scale.",
     members: [
