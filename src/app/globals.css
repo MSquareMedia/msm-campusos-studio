@@ -405,6 +405,17 @@ button {
   padding-inline: 1.75rem;
 }
 
+/* Quiet by default, a beat brighter on hover: the monochrome mark itself
+   carries the shape, this just keeps the strip from reading as one flat
+   wall of equal-weight logos. */
+.hero-logo-mark img {
+  opacity: 0.62;
+  transition: opacity 0.25s var(--ease-out-strong, ease);
+}
+.hero-logo-mark:hover img {
+  opacity: 1;
+}
+
 @keyframes hero-logo-scroll {
   to {
     transform: translateX(-50%);

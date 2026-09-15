@@ -38,21 +38,30 @@ export const metadata: Metadata = buildMetadata({
  * reaching another sector; interleaving the first three of each shows the
  * spread immediately and still puts education first.
  */
+// Every asset in "<dir>/clients/<file>" has a pre-rendered monochrome twin at
+// "<dir>/clients/mono/<file>.png" (see scripts note in RingHero.tsx), built
+// with a real per-pixel desaturate + levels pass rather than a CSS filter, so
+// filled-shape marks (a solid badge, a filled crest) keep their internal
+// detail instead of the old brightness-0/invert trick, which collapsed any
+// filled shape into a blank rectangle.
+function toMonoSrc(src: string) {
+  const lastSlash = src.lastIndexOf("/");
+  const dir = src.slice(0, lastSlash);
+  const file = src.slice(lastSlash + 1).replace(/\.svg$/i, ".png");
+  return `${dir}/mono/${file}`;
+}
+
 function buildHeroLogos() {
   const industries = [education, automotive, healthcare, realEstate];
-  // No exclusion list needed here any more: the marquee used to force every
-  // logo to a white silhouette (brightness-0 + invert), which rendered as a
-  // blank rectangle for any logo built from a filled shape rather than a
-  // thin outline. RingHero now shows every logo in its real colour on a
-  // fixed-size white card instead, so nothing in the roster needs to be
-  // hidden from this marquee any more.
   const lists = industries.map((i) => i.clients?.logos ?? []);
   const seen = new Set<string>();
   const ordered = [
     ...lists.flatMap((list) => list.slice(0, 3)),
     ...lists.flatMap((list) => list.slice(3)),
   ];
-  return ordered.filter((logo) => (seen.has(logo.name) ? false : (seen.add(logo.name), true)));
+  return ordered
+    .filter((logo) => (seen.has(logo.name) ? false : (seen.add(logo.name), true)))
+    .map((logo) => ({ ...logo, src: toMonoSrc(logo.src) }));
 }
 
 export const revalidate = 60;
