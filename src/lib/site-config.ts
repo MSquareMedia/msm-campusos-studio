@@ -111,7 +111,6 @@ export const footerLinks = {
   industries: industryNav,
   company: [
     { label: "About SOTAPO", href: "/about" },
-    { label: "Sotapo Education, powered by MSM CampusOS", href: "/campusos" },
     { label: "About MSM Unify", href: "https://www.msmunify.com/about-us/" },
     { label: "Free marketing audit", href: "/audit" },
     { label: "Careers", href: "/careers" },
