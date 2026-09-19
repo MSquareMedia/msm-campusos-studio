@@ -60,7 +60,7 @@ export function Footer() {
           style={{ borderColor: "var(--border-inverse)" }}
         >
           <p>&copy; {new Date().getFullYear()} MSM Unify. All rights reserved.</p>
-          <p>SOTAPO is an initiative of MSM Unify. In education, Sotapo Education is powered by MSM CampusOS.</p>
+          <p>SOTAPO is an initiative of MSM Unify.</p>
         </div>
       </div>
     </footer>
