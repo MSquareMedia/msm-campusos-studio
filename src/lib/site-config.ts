@@ -12,7 +12,7 @@ export const siteConfig = {
   name: "SOTAPO",
   tagline: "We move what matters.",
   parentBrand: "MSM Unify",
-  url: "https://www.msmunify.com",
+  url: "https://sotapo.com",
   description:
     "SOTAPO is a growth agency for automotive, healthcare, real estate, and beyond, and, as Sotapo Education, powered by MSM CampusOS, the operating system behind education: admissions, academics, and institutional operations, not just marketing.",
 };
