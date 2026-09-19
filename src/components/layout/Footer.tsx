@@ -1,8 +1,14 @@
 import Link from "next/link";
-import { LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
+import { FacebookLogo, InstagramLogo, LinkedinLogo } from "@phosphor-icons/react/dist/ssr";
 import { MSMLogo } from "./MSMLogo";
 import { footerLinks, primaryCta } from "@/lib/site-config";
 import { AuditCTA } from "./AuditCTA";
+
+const socialLinks = [
+  { href: "https://www.linkedin.com/company/sotapohq", label: "SOTAPO on LinkedIn", Icon: LinkedinLogo },
+  { href: "https://www.facebook.com/sotapo", label: "SOTAPO on Facebook", Icon: FacebookLogo },
+  { href: "https://www.instagram.com/sotapoofficial/", label: "SOTAPO on Instagram", Icon: InstagramLogo },
+];
 
 export function Footer() {
   return (
@@ -28,16 +34,19 @@ export function Footer() {
               </Link>
             </div>
             <div className="mt-6 flex items-center gap-3">
-              <a
-                href="https://www.linkedin.com/company/sotapohq"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="SOTAPO on LinkedIn"
-                className="flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
-                style={{ borderColor: "var(--border-inverse)", color: "var(--text-inverse-muted)" }}
-              >
-                <LinkedinLogo size={18} weight="fill" aria-hidden="true" />
-              </a>
+              {socialLinks.map(({ href, label, Icon }) => (
+                <a
+                  key={href}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:border-[var(--brand-accent)] hover:text-[var(--brand-accent)]"
+                  style={{ borderColor: "var(--border-inverse)", color: "var(--text-inverse-muted)" }}
+                >
+                  <Icon size={18} weight="fill" aria-hidden="true" />
+                </a>
+              ))}
             </div>
           </div>
 
