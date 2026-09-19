@@ -112,17 +112,14 @@ export function ServiceLeadership({
                     </div>
                   )}
                   <h3 className="font-display mt-3.5 text-sm font-semibold leading-tight">
-                    {member.name}
+                    {member.name},{" "}
+                    <span style={{ color: "var(--brand-accent)" }}>{member.role}</span>
                   </h3>
-                  <p
-                    className="font-display mt-0.5 text-xs font-semibold leading-tight"
-                    style={{ color: "var(--brand-accent)" }}
-                  >
-                    {member.role}
-                  </p>
-                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
-                    {member.bio}
-                  </p>
+                  {member.bio && (
+                    <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
+                      {member.bio}
+                    </p>
+                  )}
                 </div>
               </FadeUp>
             ))}
