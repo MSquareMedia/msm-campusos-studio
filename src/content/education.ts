@@ -463,8 +463,8 @@ export const education: IndustryContent = {
       // misrepresentation regardless of how the build got there.
       //
       // The 23 people below are real, client-supplied (name and title confirmed
-      // by the client; 8 of them have no photo or bio yet and render an
-      // initials tile until the client supplies them), which is why `role` here does
+      // by the client; 8 of them have no photo yet and render an
+      // initials tile until the client supplies one), which is why `role` here does
       // not follow the "must match a `roles[].title` below" convention the
       // comment above describes: they are the real bench, not seat-fillers
       // matched one-to-one against the modernServices catalogue.
@@ -477,7 +477,7 @@ export const education: IndustryContent = {
         {
           name: "Vipul Sharma",
           role: "Head, Client Servicing",
-          bio: "",
+          bio: "Leads client servicing at SOTAPO, owning the day-to-day relationship with every account. Keeps briefs, timelines and deliverables aligned across teams, so clients always know what is moving, what comes next, and who is accountable.",
         },
         {
           name: "Gauri Raina",
@@ -494,7 +494,7 @@ export const education: IndustryContent = {
         {
           name: "Shweta Rani",
           role: "Manager, PR",
-          bio: "",
+          bio: "Manages PR for SOTAPO clients, shaping how their story reaches the media. Plans outreach, coordinates announcements and thought leadership, and builds the relationships that turn clear messaging and credibility into coverage that supports growth.",
         },
         {
           name: "Ananya Tandon",
@@ -535,7 +535,7 @@ export const education: IndustryContent = {
         {
           name: "Akansha Negi",
           role: "Brand Strategist",
-          bio: "",
+          bio: "Develops brand strategy for SOTAPO clients, turning audience insight and market context into clear positioning. Shapes the messaging and narrative that guide creative and campaigns, so every brand shows up with a distinct point of view.",
         },
         {
           name: "Tahir Rizvi",
@@ -546,7 +546,7 @@ export const education: IndustryContent = {
         {
           name: "Rohit Yadav",
           role: "Video Specialist",
-          bio: "",
+          bio: "Produces video content for SOTAPO campaigns, from concept and planning through editing and final delivery. Focused on turning ideas into clear, engaging films and short-form edits built for social, brand and campaign use.",
         },
         {
           name: "Sachet Jain",
@@ -563,7 +563,7 @@ export const education: IndustryContent = {
         {
           name: "Pranjal Kalra",
           role: "SEO Specialist",
-          bio: "",
+          bio: "Drives organic growth for SOTAPO clients through search. Works across technical SEO, on-page optimisation, content and keyword research to improve visibility, attract qualified traffic and turn search demand into real enquiries.",
         },
         {
           name: "Ayush Bhatnagar",
@@ -580,17 +580,17 @@ export const education: IndustryContent = {
         {
           name: "Vaibhav Sharma",
           role: "Performance Marketer",
-          bio: "",
+          bio: "Runs paid performance campaigns for SOTAPO clients across digital ad platforms. Handles audience targeting, budgets, creative testing and reporting, optimising continuously to lower acquisition costs and deliver qualified leads.",
         },
         {
-          name: "Aman Kumar",
+          name: "Aman Gupta",
           role: "Performance Marketer",
-          bio: "",
+          bio: "Plans and optimises paid media for SOTAPO clients, focused on measurable results. Works across ad platforms, tracking and conversion optimisation, using data to refine targeting and spend and improve the quality and cost of leads.",
         },
         {
           name: "Varun Panicker",
           role: "Business Development",
-          bio: "",
+          bio: "Builds new partnerships and opportunities for SOTAPO across its industries. Identifies prospects, opens conversations and works with clients to understand their goals, connecting them with the right solutions and long-term relationships.",
         },
         {
           name: "Samrat Ghosh",
