@@ -39,7 +39,7 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: "MSM Unify",
     url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    logo: `${siteConfig.url}/brand/sotapo-logo.png`,
     sameAs: [
       "https://www.linkedin.com/company/msm-unify/",
       "https://www.facebook.com/msmunify",
