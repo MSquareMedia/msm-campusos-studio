@@ -13,7 +13,7 @@ function revalidateAll(slug: string) {
     "/case-studies",
     "/work",
     `/work/${slug}`,
-    "/campusos",
+    "/education",
     "/automotive",
     "/healthcare",
     "/real-estate",
