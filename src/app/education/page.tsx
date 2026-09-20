@@ -8,6 +8,9 @@ import { getPublishedCaseStudies } from "@/lib/case-studies-content";
 export const revalidate = 60;
 import { IndustryHero } from "@/components/industry/IndustryHero";
 import { ChapterStory } from "@/components/industry/education/ChapterStory";
+import { ChapterReveal } from "@/components/industry/education/ChapterReveal";
+import { ComplianceSection } from "@/components/industry/education/ComplianceSection";
+import { IndustryPressures } from "@/components/industry/IndustryPressures";
 import { PointOfView } from "@/components/industry/PointOfView";
 import { CapabilityJourney } from "@/components/industry/CapabilityJourney";
 import { ModernServicesExplorer } from "@/components/industry/ModernServicesExplorer";
@@ -16,13 +19,12 @@ import { ClientRollCall } from "@/components/industry/ClientRollCall";
 import { CaseStudyFeature } from "@/components/industry/CaseStudyFeature";
 import { TestimonialSection } from "@/components/industry/TestimonialSection";
 import { EngagementModel } from "@/components/industry/EngagementModel";
-import { GovernanceSection } from "@/components/industry/GovernanceSection";
 import { FinalCTA } from "@/components/industry/FinalCTA";
 
 export const metadata: Metadata = buildMetadata({
   title: education.metaTitle,
   description: education.metaDescription,
-  path: "/campusos",
+  path: "/education",
 });
 
 export default async function EducationPage() {
@@ -30,12 +32,12 @@ export default async function EducationPage() {
   const service = serviceJsonLd({
     name: education.metaTitle,
     description: education.metaDescription,
-    path: "/campusos",
+    path: "/education",
     industry: "Education",
   });
   const breadcrumb = breadcrumbJsonLd([
     { name: "SOTAPO", path: "/" },
-    { name: "Sotapo Education", path: "/campusos" },
+    { name: "Education", path: "/education" },
   ]);
 
   return (
@@ -56,11 +58,20 @@ export default async function EducationPage() {
         eyebrow={education.hero.eyebrow}
         headline={education.hero.headline}
         supportingCopy={education.hero.supportingCopy}
-        mediaLabel="MSM CampusOS official brand film poster"
-        mediaSrc={education.hero.video?.posterSrc}
-        video={education.hero.video}
+        mediaLabel="A campus leader standing alone under a single light"
+        mediaSrc="/images/education/hero-poster.jpg"
+        loopSrc={education.hero.loopSrc}
         capabilitiesHref="#capabilities"
       />
+
+      {education.industry && (
+        <IndustryPressures
+          heading={education.industry.heading}
+          body={education.industry.body}
+          pressures={education.industry.pressures}
+          stats={education.industry.stats}
+        />
+      )}
 
       {/* Everything between the (untouched) hero and the final CTA sits on
           one continuous white-to-peach gradient rather than a stack of flat
@@ -73,6 +84,8 @@ export default async function EducationPage() {
         intro={education.story.intro}
         moments={education.story.moments}
       />
+
+      {education.story.reveal && <ChapterReveal reveal={education.story.reveal} />}
 
       <PointOfView
         heading={education.pov.heading}
@@ -133,9 +146,12 @@ export default async function EducationPage() {
 
       <EngagementModel steps={education.engagementModel} />
 
-      <GovernanceSection
+      <ComplianceSection
         heading={education.governance.heading}
-        body={education.governance.body}
+        intro={education.governance.intro}
+        commitments={education.governance.body}
+        markets={education.governance.markets ?? []}
+        prompt={education.governance.marketsPrompt}
         note={education.governance.note}
       />
       </div>

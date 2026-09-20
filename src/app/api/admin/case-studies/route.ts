@@ -14,7 +14,7 @@ function revalidateAll() {
     "/",
     "/case-studies",
     "/work",
-    "/campusos",
+    "/education",
     "/automotive",
     "/healthcare",
     "/real-estate",

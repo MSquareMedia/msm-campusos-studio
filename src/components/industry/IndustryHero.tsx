@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { LinkedinLogo, Play, X } from "@phosphor-icons/react/dist/ssr";
+import { Play, X } from "@phosphor-icons/react/dist/ssr";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { PlaceholderMedia } from "./PlaceholderMedia";
 import { primaryCta, secondaryCta } from "@/lib/site-config";
@@ -30,6 +30,7 @@ export function IndustryHero({
   mediaSrc,
   video,
   capabilitiesHref,
+  loopSrc,
   enablePointerDrift = false,
 }: {
   variant: Variant;
@@ -40,6 +41,8 @@ export function IndustryHero({
   mediaSrc?: string;
   video?: { youtubeId: string; title: string };
   capabilitiesHref: string;
+  /** Optional silent, looping clip laid over the poster. */
+  loopSrc?: string;
   enablePointerDrift?: boolean;
 }) {
   const sectionRef = useRef<HTMLElement>(null);
@@ -104,14 +107,29 @@ export function IndustryHero({
               </div>
             </div>
           ) : mediaSrc ? (
-            <Image
-              src={mediaSrc}
-              alt={mediaLabel}
-              fill
-              priority
-              sizes="100vw"
-              className="object-cover"
-            />
+            <>
+              <Image
+                src={mediaSrc}
+                alt={mediaLabel}
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover"
+              />
+              {loopSrc && !reduced && (
+                <video
+                  className="absolute inset-0 h-full w-full object-cover"
+                  src={loopSrc}
+                  poster={mediaSrc}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-hidden="true"
+                />
+              )}
+            </>
           ) : (
             <PlaceholderMedia variant={variant} label={mediaLabel} className="h-full w-full" />
           )}
@@ -177,20 +195,6 @@ export function IndustryHero({
                 aria-hidden="true"
               />
               {eyebrow}
-              {/* MSM CampusOS's own LinkedIn, right where the eyebrow names
-                  it, the site's first and most prominent mention of it, the
-                  footer's LinkedIn icon is SOTAPO's own account instead. */}
-              {variant === "education" && (
-                <a
-                  href="https://www.linkedin.com/company/msm-campusos/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="MSM CampusOS on LinkedIn"
-                  className="text-white/70 transition-colors hover:text-white"
-                >
-                  <LinkedinLogo size={16} weight="fill" aria-hidden="true" />
-                </a>
-              )}
             </p>
           </FadeUp>
           <TextReveal

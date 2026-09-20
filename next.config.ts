@@ -2,8 +2,7 @@ import type { NextConfig } from "next";
 
 /**
  * Route map after the SOTAPO rebrand: the masterbrand moved from /campusos
- * to site root, and /campusos is now reserved for the one vertical that goes
- * deeper than marketing — Sotapo Education, powered by MSM CampusOS.
+ * to site root, and the education vertical now lives at /education.
  * Permanent redirects here catch anyone (or any search engine) still holding
  * a pre-rebrand /campusos/* URL.
  */
@@ -25,7 +24,8 @@ const nextConfig: NextConfig = {
       { source: "/campusos/careers", destination: "/careers", permanent: true },
       { source: "/campusos/case-studies", destination: "/case-studies", permanent: true },
       { source: "/campusos/contact", destination: "/contact", permanent: true },
-      { source: "/campusos/education", destination: "/campusos", permanent: true },
+      { source: "/campusos", destination: "/education", permanent: true },
+      { source: "/campusos/education", destination: "/education", permanent: true },
       { source: "/campusos/healthcare", destination: "/healthcare", permanent: true },
       { source: "/campusos/real-estate", destination: "/real-estate", permanent: true },
       { source: "/campusos/solutions/:slug", destination: "/solutions/:slug", permanent: true },

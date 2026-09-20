@@ -145,11 +145,11 @@ export function SolutionsMenu(props: MenuProps) {
             onMouseEnter={() => setActiveSlug(solution.slug)}
             onFocus={() => setActiveSlug(solution.slug)}
             onMouseLeave={() => setActiveSlug((prev) => (prev === solution.slug ? null : prev))}
-            aria-label={`${solution.label} solutions`}
+            aria-label={`${solution.menuLabel ?? solution.label} solutions`}
             className={columnBase}
             style={{ borderColor: "var(--border)" }}
           >
-            <ColumnHead label={solution.label} />
+            <ColumnHead label={solution.menuLabel ?? solution.label} />
             <span className="mt-1.5 block text-xs leading-snug text-[var(--text-muted)]">
               {solution.blurb}
             </span>

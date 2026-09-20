@@ -150,6 +150,23 @@ export type ClientTestimonial = {
   clientLogoTall?: boolean;
 };
 
+export type StoryReveal = {
+  label: string;
+  heading: string;
+  body: string;
+  caption: string;
+  closing: string;
+  logo: { src: string; alt: string; width: number; height: number };
+  video: { youtubeId: string; posterSrc: string; title: string };
+  linkedinUrl?: string;
+};
+
+export type ComplianceMarket = {
+  name: string;
+  frameworks: string[];
+  summary: string;
+};
+
 export type IndustryContent = {
   slug: "automotive" | "healthcare" | "real-estate" | "education";
   industryLabel: string;
@@ -164,11 +181,25 @@ export type IndustryContent = {
       posterSrc: string;
       title: string;
     };
+    /** Optional silent, looping background clip. The poster stays underneath
+     *  and is what shows until (or instead of) the clip. */
+    loopSrc?: string;
+  };
+  /** "The industry, in one screen": the universal pressures, before any
+   *  product or story appears. Stats render only when supplied, and every stat
+   *  must carry a real source. */
+  industry?: {
+    heading: string;
+    body: string;
+    pressures: Array<{ title: string; blurb: string }>;
+    stats?: Array<{ value: string; label: string; source: string }>;
   };
   story: {
     heading: string;
     intro: string;
     moments: StoryMoment[];
+    /** The reveal that follows the last chapter. */
+    reveal?: StoryReveal;
   };
   pov: {
     heading: string;
@@ -185,6 +216,11 @@ export type IndustryContent = {
     heading: string;
     body: string[];
     note: string;
+    /** Education only: a lead-in, the regulatory markets served, and the
+     *  prompt for markets not listed. */
+    intro?: string;
+    markets?: ComplianceMarket[];
+    marketsPrompt?: { title: string; body: string };
   };
   finalCta: {
     heading: string;

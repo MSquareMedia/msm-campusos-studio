@@ -4,9 +4,9 @@ import { homepage } from "@/content/homepage";
  * SOTAPO is the masterbrand: a growth agency, marketing partner to every
  * industry. Education is the one vertical where it goes further, an
  * operating partner, not just a marketing one, and that deeper offer is
- * endorsed rather than renamed: "Sotapo Education, powered by MSM CampusOS."
+ * introduced only where it is earned: on the education page, at the reveal.
  * MSM CampusOS is never the masterbrand and never appears outside the
- * education page (/campusos). See education.ts for that page's own content.
+ * education page (/education). See education.ts for that page's own content.
  */
 export const siteConfig = {
   name: "SOTAPO",
@@ -14,7 +14,7 @@ export const siteConfig = {
   parentBrand: "MSM Unify",
   url: "https://sotapo.com",
   description:
-    "SOTAPO is a growth agency for automotive, healthcare, real estate, and beyond, and, as Sotapo Education, powered by MSM CampusOS, the operating system behind education: admissions, academics, and institutional operations, not just marketing.",
+    "SOTAPO is a growth agency for education, automotive, healthcare, real estate, and beyond, moving revenue up, costs down, and customers closer.",
 };
 
 export type IndustrySlug = "education" | "automotive" | "healthcare" | "real-estate";
@@ -23,10 +23,10 @@ export const industryNav: { slug: IndustrySlug; label: string; href: string; blu
   {
     slug: "education",
     label: "Education",
-    // The one industry with its own path: this is where SOTAPO becomes an
-    // operating partner, not just a marketing one, see education.ts.
-    href: "/campusos",
-    blurb: "Where we move more than perception. 14+ years, education-only.",
+    // The one industry where SOTAPO becomes an operating partner, not just a
+    // marketing one, see education.ts.
+    href: "/education",
+    blurb: "Where we move more than perception.",
   },
   {
     slug: "automotive",
@@ -55,7 +55,15 @@ export type SolutionSlug =
   | "digital-experience"
   | "data-ai-measurement";
 
-export const solutionsNav: { slug: SolutionSlug; label: string; href: string; blurb: string }[] = [
+export const solutionsNav: {
+  slug: SolutionSlug;
+  label: string;
+  /** Shorter text for the header dropdown and mobile menu only. `label` stays
+   *  the canonical name other pages join on. */
+  menuLabel?: string;
+  href: string;
+  blurb: string;
+}[] = [
   {
     slug: "strategy-intelligence",
     label: "Strategy & Intelligence",
@@ -77,6 +85,7 @@ export const solutionsNav: { slug: SolutionSlug; label: string; href: string; bl
   {
     slug: "digital-experience",
     label: "Digital Experience & Conversion",
+    menuLabel: "Experience & Conversion",
     href: "/solutions/digital-experience",
     blurb: "Sites, journeys, CRM, and conversion design.",
   },
