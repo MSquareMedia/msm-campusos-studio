@@ -6,7 +6,7 @@ import Link from "next/link";
  * tone climb letter by letter from a quiet grey "so" to the final O in full
  * Signal Red. This is the site-wide logo; MSM CampusOS only appears as a
  * secondary, endorsed lockup inside the education page itself (see the
- * eyebrow on /campusos).
+ * eyebrow on /education).
  *
  * Two real approved renderings, not one image boxed for both surfaces: the
  * light-background mark (public/brand/sotapo-logo.png, near-black "TAP")

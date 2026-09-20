@@ -8,7 +8,7 @@ import { SolutionsMenu, IndustriesMenu, type MenuId } from "./NavMenus";
 import { industryNav, solutionsNav, primaryCta, caseStudiesLink } from "@/lib/site-config";
 import { AuditCTA } from "./AuditCTA";
 
-type NavGroup = { slug: string; label: string; href: string; blurb: string };
+type NavGroup = { slug: string; label: string; menuLabel?: string; href: string; blurb: string };
 
 function MobileGroup({ label, items, onNavigate }: { label: string; items: NavGroup[]; onNavigate: () => void }) {
   const [expanded, setExpanded] = useState(false);
@@ -32,7 +32,7 @@ function MobileGroup({ label, items, onNavigate }: { label: string; items: NavGr
               className="py-2 text-sm text-[var(--text-muted)]"
               onClick={onNavigate}
             >
-              {item.label}
+              {item.menuLabel ?? item.label}
             </Link>
           ))}
         </div>
