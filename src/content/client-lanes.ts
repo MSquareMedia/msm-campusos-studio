@@ -38,10 +38,10 @@ export const clientLanes: ClientLane[] = ORDER.flatMap((industry) => {
     {
       id: industry.slug,
       label: industry.industryLabel,
-      // Education is the one industry that lives at /campusos (Sotapo
+      // Education is the one industry that lives at /education (Sotapo
       // Education, powered by MSM CampusOS); every other industry is a
       // root-level SOTAPO page.
-      href: industry.slug === "education" ? "/campusos" : `/${industry.slug}`,
+      href: industry.slug === "education" ? "/education" : `/${industry.slug}`,
       logos: clients.logos,
       disclosure: clients.disclosure,
     },

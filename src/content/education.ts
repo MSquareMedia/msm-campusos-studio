@@ -3,22 +3,31 @@ import type { IndustryContent } from "./types";
 export const education: IndustryContent = {
   slug: "education",
   industryLabel: "Education",
-  metaTitle: "MSM CampusOS for Education: the operating platform for campuses",
+  metaTitle: "Education: grow your institution, and help run it",
   metaDescription:
-    "MSM CampusOS is the operating platform for campuses: marketing, creative, curriculum, faculty support, and evaluation infrastructure, built by a team with over a decade in education exclusively.",
+    "SOTAPO grows your institution and, in education, helps run it too: enrolment marketing, brand, admissions, delivery and outcomes, with MSM CampusOS.",
   hero: {
-    // Fixed endorsement line, never reworded, never reversed. See
-    // AGENTS.md-adjacent brand notes: SOTAPO is the masterbrand everywhere
-    // else; only here does it endorse a deeper, named operating layer.
-    eyebrow: "Sotapo Education, Powered by MSM CampusOS",
+    eyebrow: "SOTAPO · EDUCATION",
     headline: "It worked. Mostly.",
     supportingCopy:
-      "The real film behind MSM CampusOS. How institutions turn quiet dysfunction into a system that scales.",
-    video: {
-      youtubeId: "pCYH4seVLos",
-      posterSrc: "/images/education/hero-poster.jpg",
-      title: "The Future of Education Isn't Waiting: MSM CampusOS Official Brand Film",
-    },
+      "Every campus runs on something that mostly works. SOTAPO grows your institution, and in education, we can help you run it too.",
+    // The film's poster frame. No product branding on the hero: the film
+    // itself lives at the Chapter III reveal. Set `loopSrc` to a silent
+    // 6-10 second campus clip (timetable chaos, a queue of incomplete
+    // applications, a lecture hall filling up) to play over the poster.
+  },
+  industry: {
+    heading: "One institution. Four jobs. Zero slack.",
+    body: "Education is the one industry that has to recruit, teach, serve and prove itself at the same time. When acquisition costs rise, intake dips, or a review cycle arrives, each of those jobs breaks at once.",
+    pressures: [
+      { title: "Acquisition costs", blurb: "The price of finding each applicant keeps climbing." },
+      { title: "International student volatility", blurb: "Visa rules, currencies and policy move intake from one cycle to the next." },
+      { title: "Enrolment cliffs", blurb: "Shrinking cohorts turn a full intake into a scramble." },
+      { title: "Accreditation scrutiny", blurb: "Review cycles ask for evidence the institution has to be ready to produce." },
+      { title: "Outcomes", blurb: "Boards, regulators and families all want proof that students got somewhere." },
+    ],
+    // Deliberately unset: one sourced global statistic and one India data
+    // point go here once pulled and verified. Nothing renders until then.
   },
   story: {
     heading: "Nobody planned for this.",
@@ -44,11 +53,30 @@ export const education: IndustryContent = {
         credit: "Photography by Aleksi Tappura, via Wikimedia Commons (CC0).",
       },
     ],
+    reveal: {
+      label: "Chapter III",
+      heading: "Then someone ran the campus like a system.",
+      body: "In most industries, SOTAPO helps you grow your business. In education, we can help you run it too. Behind Westfield's turnaround sits MSM CampusOS: the operating platform built over fourteen-plus years inside real campuses, from first enquiry to alumni.",
+      caption: "MSM CampusOS. The operating layer behind the growth.",
+      closing: "SOTAPO brings it with us.",
+      logo: {
+        src: "/brand/msm-campusos-logo-v2.png",
+        alt: "MSM CampusOS",
+        width: 1200,
+        height: 354,
+      },
+      video: {
+        youtubeId: "pCYH4seVLos",
+        posterSrc: "/images/education/hero-poster.jpg",
+        title: "The Future of Education Isn't Waiting: MSM CampusOS Official Brand Film",
+      },
+      linkedinUrl: "https://www.linkedin.com/company/msm-campusos/",
+    },
   },
   pov: {
     heading: "Not a team learning the sector.",
     body: [
-      "The people running MSM CampusOS previously operated one of India's most respected education-focused agencies. Fourteen-plus years working in education exclusively. Fifty-plus schools. Five hundred-plus institutions served.",
+      "Fourteen-plus years working in education exclusively. Fifty-plus schools. Five hundred-plus institutions served. The people running MSM CampusOS earned that record at one of India's most respected education-focused agencies.",
       "That same bench now runs on global technology infrastructure across twenty-nine countries. Marketing, creative, curriculum, faculty development, and evaluation, connected as one system rather than run as separate engagements.",
     ],
   },
@@ -204,14 +232,28 @@ export const education: IndustryContent = {
     },
   ],
   governance: {
-    heading: "Built around your accreditation cycle",
+    heading: "Compliance, wherever you operate",
+    intro: "Four commitments hold in every market. The frameworks change; the standard does not.",
     body: [
-      "Indian higher education is under active regulatory change: NEP 2020 implementation, NAAC reaccreditation cycles, AICTE and UGC compliance, outcome-based education mapping.",
       "Curriculum and accreditation work is built to be defensible at review, not just presentable in a pitch.",
       "Student and faculty data used in evaluation infrastructure and CRM journeys is handled under institution-controlled agreements.",
       "Assessment integration connects to your existing exam workflow rather than replacing it. Your scoring rubrics stay yours.",
       "Every accreditation, compliance, and outcomes claim is reviewed against your own documentation before it goes near a regulator.",
     ],
+    // Only markets with real delivery belong here. Add a card per market as
+    // it is confirmed; do not list a regulator we have not delivered against.
+    markets: [
+      {
+        name: "India",
+        frameworks: ["NEP 2020", "NAAC", "AICTE", "UGC"],
+        summary:
+          "Indian higher education is under active regulatory change: NEP 2020 implementation, NAAC reaccreditation cycles, AICTE and UGC compliance, outcome-based education mapping.",
+      },
+    ],
+    marketsPrompt: {
+      title: "Operating elsewhere?",
+      body: "Tell us which regulator and accreditation body you answer to. We build the plan around those requirements.",
+    },
     note: "The right approach depends on your institution type, accreditation status, and state or national regulatory requirements. We build the plan around those requirements.",
   },
   finalCta: {
@@ -222,20 +264,20 @@ export const education: IndustryContent = {
     heading: "MSM Unify, by the numbers",
     sourceNote: "MSM Unify company-wide figures and team track record, MSM CampusOS India Edition briefing (2026).",
     stats: [
-      { value: "190,000+", label: "Students helped", sourceNote: "MSM Unify company-wide, MSM CampusOS India Edition briefing (2026)." },
-      { value: "1,500+", label: "Partner campuses", sourceNote: "MSM Unify company-wide, MSM CampusOS India Edition briefing (2026)." },
-      { value: "29", label: "Countries", sourceNote: "MSM Unify company-wide, MSM CampusOS India Edition briefing (2026)." },
       { value: "14+", label: "Years in education marketing", sourceNote: "Core leadership team track record, MSM CampusOS India Edition briefing (2026)." },
       { value: "500+", label: "Institutions served", sourceNote: "Core leadership team track record, MSM CampusOS India Edition briefing (2026)." },
+      { value: "29", label: "Countries", sourceNote: "MSM Unify company-wide, MSM CampusOS India Edition briefing (2026)." },
+      { value: "1,500+", label: "Partner campuses", sourceNote: "MSM Unify company-wide, MSM CampusOS India Edition briefing (2026)." },
+      { value: "190,000+", label: "Students helped", sourceNote: "MSM Unify company-wide, MSM CampusOS India Edition briefing (2026)." },
       { value: "6,000+", label: "Certified recruitment agents", sourceNote: "MSM Unify company-wide, active across 30+ source countries, MSM CampusOS India Edition briefing (2026)." },
       { value: "800+", label: "Clients served", sourceNote: "Delivered by MSM CampusOS's delivery leadership at a previous education-marketing business, before this platform." },
-      { value: "₹750 Cr+", label: "Admission revenue driven for clients", sourceNote: "Delivered by MSM CampusOS's delivery leadership at a previous education-marketing business, before this platform." },
+      { value: "₹750 Cr+", label: "India admissions revenue driven for clients", sourceNote: "Delivered by MSM CampusOS's delivery leadership at a previous education-marketing business, before this platform." },
     ],
   },
   proofLedger: {
-    heading: "Nine numbers, and where each one comes from.",
+    heading: "The MSM CampusOS record.",
     intro:
-      "Grouped by provenance rather than flattened into one wall. Some of these are MSM Unify company-wide; some belong to the team's track record before this platform existed. The distinction matters, so it is on the page rather than in a footnote.",
+      "What the team behind MSM CampusOS has delivered, across markets and campuses.",
   },
   clients: {
     heading: "Institutions the team has worked with",
@@ -247,7 +289,7 @@ export const education: IndustryContent = {
       "These reflect the body of work MSM CampusOS's leadership has led over a fourteen-year marketing and communications career, not all exclusively MSM CampusOS engagements.",
     // Order here only affects the client-roster grid on this page, the
     // homepage hero marquee re-sorts and filters this same list itself (see
-    // buildHeroLogos in app/campusos/page.tsx), including excluding a few
+    // buildHeroLogos in app/education/page.tsx), including excluding a few
     // marks that don't survive that marquee's white-silhouette filter.
     logos: [
       { name: "XLRI", src: "/images/education/clients/xlri.png" },
