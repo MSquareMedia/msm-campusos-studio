@@ -5,8 +5,7 @@ import type { ProductFeature } from "@/content/types";
 
 /**
  * Spotlight for the platform named in the Infrastructure service line. The
- * logo sits on a white patch so its red and black artwork reads on the page
- * gradient, and the CTA leaves the site for the product's own home.
+ * logo sits directly on the page with no plate behind it, and the CTA leaves the site for the product's own home.
  */
 export function ProductSpotlight({ product }: { product: ProductFeature }) {
   return (
@@ -17,7 +16,7 @@ export function ProductSpotlight({ product }: { product: ProductFeature }) {
             className="grid items-center gap-10 border p-8 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16 md:p-14"
             style={{ borderColor: "var(--border)" }}
           >
-            <div className="flex items-center justify-center bg-white px-8 py-10 md:px-10 md:py-14">
+            <div className="flex items-center justify-center px-4 py-6 md:px-6">
               <Image
                 src={product.logo.src}
                 alt={product.logo.alt}
