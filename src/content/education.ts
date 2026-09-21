@@ -209,6 +209,14 @@ export const education: IndustryContent = {
       { group: "Infrastructure", title: "MSM Aventra", description: "Unified CRM, SIS, and LMS. One integrated platform built for academic institutions." },
     ],
   },
+  product: {
+    eyebrow: "The platform",
+    heading: "One system of record for the whole campus.",
+    body: "MSM Aventra is the platform behind our Infrastructure work: CRM, student information and learning management in a single, integrated system built for academic institutions, so enquiries, enrolments and outcomes stop living in separate tools.",
+    points: ["Unified CRM, SIS and LMS", "One student record, first enquiry to alumni", "Built for academic institutions"],
+    logo: { src: "/brand/msm-aventra-logo.png", alt: "MSM Aventra", width: 868, height: 264 },
+    cta: { label: "Explore MSM Aventra", href: "https://aventra.msmunify.com/" },
+  },
   engagementModel: [
     {
       step: "01",
