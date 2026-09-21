@@ -82,6 +82,7 @@ function FooterColumn({
           <li key={link.href}>
             <Link
               href={link.href}
+              {...(/^https?:/.test(link.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               className="text-sm text-[var(--text-inverse-muted)] hover:text-white transition-colors"
             >
               {link.label}
