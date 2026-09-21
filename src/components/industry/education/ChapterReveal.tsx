@@ -36,8 +36,7 @@ export function ChapterReveal({ reveal }: { reveal: StoryReveal }) {
     <section className="py-24 md:py-36">
       <div className="container-page">
         <motion.div
-          className="mx-auto flex w-fit items-center justify-center border bg-white px-8 py-5 md:px-12 md:py-7"
-          style={{ borderColor: "var(--border)" }}
+          className="mx-auto flex w-fit items-center justify-center"
           initial={reduced ? undefined : { opacity: 0, scale: 0.94 }}
           whileInView={reduced ? undefined : { opacity: 1, scale: 1 }}
           viewport={{ once: true, amount: 0.6 }}
