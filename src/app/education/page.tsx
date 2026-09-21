@@ -19,6 +19,7 @@ import { ClientRollCall } from "@/components/industry/ClientRollCall";
 import { CaseStudyFeature } from "@/components/industry/CaseStudyFeature";
 import { TestimonialSection } from "@/components/industry/TestimonialSection";
 import { EngagementModel } from "@/components/industry/EngagementModel";
+import { ProductSpotlight } from "@/components/industry/education/ProductSpotlight";
 import { FinalCTA } from "@/components/industry/FinalCTA";
 
 export const metadata: Metadata = buildMetadata({
@@ -114,6 +115,8 @@ export default async function EducationPage() {
         intro={education.modernServices.intro}
         items={education.modernServices.items}
       />
+
+      {education.product && <ProductSpotlight product={education.product} />}
 
       {education.clients && (
         <ClientRollCall
