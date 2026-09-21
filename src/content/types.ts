@@ -161,6 +161,15 @@ export type StoryReveal = {
   linkedinUrl?: string;
 };
 
+export type ProductFeature = {
+  eyebrow: string;
+  heading: string;
+  body: string;
+  points: string[];
+  logo: { src: string; alt: string; width: number; height: number };
+  cta: { label: string; href: string };
+};
+
 export type ComplianceMarket = {
   name: string;
   frameworks: string[];
@@ -201,6 +210,8 @@ export type IndustryContent = {
     /** The reveal that follows the last chapter. */
     reveal?: StoryReveal;
   };
+  /** Optional platform spotlight, shown after the services explorer. */
+  product?: ProductFeature;
   pov: {
     heading: string;
     body: string[];
