@@ -5,7 +5,7 @@ import { footerLinks, primaryCta } from "@/lib/site-config";
 import { AuditCTA } from "./AuditCTA";
 
 const socialLinks = [
-  { href: "https://www.linkedin.com/company/sotapohq", label: "SOTAPO on LinkedIn", Icon: LinkedinLogo },
+  { href: "https://www.linkedin.com/company/sotapo", label: "SOTAPO on LinkedIn", Icon: LinkedinLogo },
   { href: "https://www.facebook.com/sotapo", label: "SOTAPO on Facebook", Icon: FacebookLogo },
   { href: "https://www.instagram.com/sotapoofficial/", label: "SOTAPO on Instagram", Icon: InstagramLogo },
 ];
