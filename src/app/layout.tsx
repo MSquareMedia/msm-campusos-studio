@@ -45,6 +45,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-scroll-behavior="smooth"
       className={`${poppins.variable} ${inter.variable} h-full antialiased`}
     >
+      <head>
+        {/* Google tag (gtag.js), GA4 property G-S39NC3ZN02 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S39NC3ZN02" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-S39NC3ZN02');`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <Script
           id="org-jsonld"
