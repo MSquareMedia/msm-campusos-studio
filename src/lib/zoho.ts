@@ -207,6 +207,11 @@ function buildZohoLead(
   }
   if (website) {
     lead.Website = website;
+  }
+  const pageUrl = payload.page_url?.trim();
+  if (pageUrl) {
+    lead.Web_Site_Url = pageUrl;
+  } else if (website) {
     lead.Web_Site_Url = website;
   }
 

@@ -128,7 +128,12 @@ export function ContactForm({ compact = false }: { compact?: boolean }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           kind: "contact",
-          payload: { ...getClientUtmParams(), ...values },
+          payload: {
+            ...getClientUtmParams(),
+            ...values,
+            // Track which page the contact came from without adding a visible field.
+            page_url: `${window.location.origin}${window.location.pathname}`,
+          },
         }),
       });
       if (!response.ok) {

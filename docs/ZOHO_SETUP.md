@@ -94,7 +94,8 @@ When a visitor submits any form on the site, the app maps the fields into Zoho C
 | **Email** | `email` | Blank |
 | **Company** | `company` or `organisation` | `"Not specified (Website Lead)"` (Zoho strictly requires Company) |
 | **Phone / Mobile** | `phone` | Contact form requires a phone number; the value is sent to both Zoho `Phone` and `Mobile` fields |
-| **Website / Web Site URL** | `website` (from hidden tracking or Audit flow) | Blank; when provided, mapped to Zoho `Website` and `Web_Site_Url` |
+| **Website** | `website` (from Audit flow) | Blank |
+| **Web Site URL** | Hidden `page_url` captured from the contact form's current page; falls back to `website` when supplied by another form | Contact submissions store the page path in Zoho `Web_Site_Url` without adding a visible form field |
 | **Lead Source** | Automatically set based on form: `"Organic_Sotapo"` for contact, `"Website Free Audit Flow"` for audit, `"Website Careers Application"` for careers, or `"Website OSiQ AI Assistant"` for OSiQ | `"MSM CampusOS Studio"` |
 | **Description** | Full formatted list of all answers, bottlenecks, goals, budgets, or conversation transcripts | — |
 
