@@ -61,6 +61,13 @@ export async function POST(request: Request) {
     clean[key] = value;
   }
 
+  if (kind === "contact" && !clean.phone?.trim()) {
+    return NextResponse.json(
+      { error: "A phone number is required for contact submissions." },
+      { status: 400 }
+    );
+  }
+
   const dbReady = isConfigured();
   const zohoReady = isZohoConfigured();
 

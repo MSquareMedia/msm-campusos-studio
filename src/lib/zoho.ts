@@ -21,9 +21,11 @@ type ZohoLeadPayload = {
   Last_Name: string;
   Email?: string;
   Phone?: string;
+  Mobile?: string;
   Company: string;
   Lead_Source?: string;
   Website?: string;
+  Web_Site_Url?: string;
   Description?: string;
   [key: string]: unknown;
 };
