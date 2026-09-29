@@ -95,7 +95,7 @@ When a visitor submits any form on the site, the app maps the fields into Zoho C
 | **Company** | `company` or `organisation` | `"Not specified (Website Lead)"` (Zoho strictly requires Company) |
 | **Phone** | `phone` | Blank |
 | **Website** | `website` (from Audit flow) | Blank |
-| **Lead Source** | Automatically set based on form: `"Website Contact Form"`, `"Website Free Audit Flow"`, `"Website Careers Application"`, or `"Website OSiQ AI Assistant"` | `"MSM CampusOS Studio"` |
+| **Lead Source** | Automatically set based on form: `"Organic_Sotapo"` for contact, `"Website Free Audit Flow"` for audit, `"Website Careers Application"` for careers, or `"Website OSiQ AI Assistant"` for OSiQ | `"MSM CampusOS Studio"` |
 | **Description** | Full formatted list of all answers, bottlenecks, goals, budgets, or conversation transcripts | — |
 
 ---
