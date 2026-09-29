@@ -4,12 +4,12 @@ import { useCallback, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { CheckCircle, PaperPlaneTilt } from "@phosphor-icons/react";
 import { TextAreaField, TextField } from "./Fields";
-import { email, fullName, minLength, optionalUrl, required } from "./validators";
+import { email, fullName, minLength, required } from "./validators";
 import type { FieldDef, FlowValues } from "./types";
 import { getClientUtmParams } from "@/lib/utm";
 
 /**
- * The contact form: one screen, seven fields, one button.
+ * The contact form: one screen, five fields, one button.
  *
  * Deliberately NOT the step flow used by the free assessment. That flow earns
  * its length because the assessment is the product, each answer changes what
@@ -56,17 +56,6 @@ function buildFields(compact: boolean): FieldDef[] {
       autoComplete: "organization",
       help: "Optional. Skip it if your email already says it.",
       emptyLabel: "Not given",
-    },
-    {
-      kind: "text",
-      name: "website",
-      type: "url",
-      label: "Website URL",
-      example: "yourinstitution.edu",
-      autoComplete: "url",
-      help: "Optional. Add your institution or company website.",
-      emptyLabel: "Not given",
-      validate: optionalUrl,
     },
     {
       kind: "textarea",
