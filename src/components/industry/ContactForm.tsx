@@ -2,20 +2,23 @@
 
 import { useState, type FormEvent } from "react";
 import { industryNav } from "@/lib/site-config";
+import { getClientUtmParams } from "@/lib/utm";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
-type Errors = Partial<Record<"name" | "email" | "company" | "message", string>>;
+type Errors = Partial<Record<"name" | "email" | "company" | "phone" | "message", string>>;
 
 export function ContactForm() {
   const [state, setState] = useState<FormState>("idle");
   const [errors, setErrors] = useState<Errors>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   function validate(data: FormData): Errors {
     const next: Errors = {};
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const company = String(data.get("company") ?? "").trim();
+    const phone = String(data.get("phone") ?? "").trim();
     const message = String(data.get("message") ?? "").trim();
 
     if (!name) next.name = "Enter your full name.";
@@ -25,6 +28,7 @@ export function ContactForm() {
       next.email = "Enter a valid email address.";
     }
     if (!company) next.company = "Enter your company name.";
+    if (!phone) next.phone = "Enter a phone number so we can contact you.";
     if (!message) next.message = "Tell us briefly what you need.";
 
     return next;
@@ -42,12 +46,38 @@ export function ContactForm() {
     }
 
     setState("submitting");
+    setSubmitError(null);
     try {
-      // Placeholder for the real submission endpoint. No external message is
-      // sent until this is wired to an authorized CRM or mail service.
-      await new Promise((resolve) => setTimeout(resolve, 700));
+      const response = await fetch("/api/submissions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          kind: "contact",
+          payload: {
+            ...getClientUtmParams(),
+            name: String(data.get("name") ?? "").trim(),
+            email: String(data.get("email") ?? "").trim(),
+            company: String(data.get("company") ?? "").trim(),
+            phone: String(data.get("phone") ?? "").trim(),
+            industry: String(data.get("industry") ?? "").trim(),
+            message: String(data.get("message") ?? "").trim(),
+            page_url: `${window.location.origin}${window.location.pathname}`,
+          },
+        }),
+      });
+      if (!response.ok) {
+        const result = await response.json().catch(() => ({}));
+        setSubmitError(
+          result?.code === "not_configured"
+            ? "This form is not connected to our inbox yet. Please email us instead."
+            : "Something went wrong sending your message. Please try again.",
+        );
+        setState("error");
+        return;
+      }
       setState("success");
     } catch {
+      setSubmitError("We could not reach the server. Check your connection and try again.");
       setState("error");
     }
   }
@@ -76,6 +106,11 @@ export function ContactForm() {
           Please fix the highlighted fields before sending.
         </div>
       )}
+      {submitError && (
+        <div role="alert" className="border p-4 text-sm" style={{ borderColor: "var(--brand-accent)" }}>
+          {submitError}
+        </div>
+      )}
 
       <Field label="Full name" name="name" error={errors.name} autoComplete="name" />
       <Field
@@ -86,6 +121,7 @@ export function ContactForm() {
         autoComplete="email"
       />
       <Field label="Company" name="company" error={errors.company} autoComplete="organization" />
+      <Field label="Phone" name="phone" type="tel" error={errors.phone} autoComplete="tel" />
 
       <div className="flex flex-col gap-2">
         <label htmlFor="industry" className="font-display text-sm font-semibold">
