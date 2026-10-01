@@ -34,6 +34,8 @@ export type StepFlowProps = {
   idPrefix: string;
   /** Which intake this is. Stored against the row so admin can filter. */
   kind: "audit" | "contact" | "careers";
+  /** Optional hidden fields to include in the submission payload, like the current URL. */
+  hiddenFields?: Record<string, string>;
 };
 
 export function StepFlow({
@@ -44,6 +46,7 @@ export function StepFlow({
   renderSuccess,
   idPrefix,
   kind,
+  hiddenFields = {},
 }: StepFlowProps) {
   const reduced = useReducedMotion();
 
@@ -172,7 +175,7 @@ export function StepFlow({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           kind,
-          payload: { ...getClientUtmParams(), ...values },
+          payload: { ...getClientUtmParams(), ...hiddenFields, ...values },
         }),
       });
       if (!response.ok) {

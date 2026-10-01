@@ -166,6 +166,13 @@ const steps: StepDef[] = [
       },
       {
         kind: "text",
+        name: "phone",
+        type: "tel",
+        label: "Phone number",
+        autoComplete: "tel",
+      },
+      {
+        kind: "text",
         name: "organisation",
         label: "Organisation",
         help: "Optional. Skip it if the email already says it.",
@@ -182,6 +189,7 @@ export function AuditFlow() {
       idPrefix="audit"
       kind="audit"
       steps={steps}
+      hiddenFields={{ url: typeof window !== "undefined" ? window.location.href : "" }}
       reviewQuestion="Read it back before it goes."
       reviewHelp="Change anything that is not right. Everything below is what the audit will be built from."
       submitLabel="Request the audit"

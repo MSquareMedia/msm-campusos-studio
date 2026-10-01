@@ -31,7 +31,7 @@ type FieldBase = {
 export type FieldDef =
   | (FieldBase & {
       kind: "text";
-      type?: "text" | "email" | "url" | "tel";
+      type?: "text" | "email" | "url" | "tel" | "hidden";
       autoComplete?: string;
       /** Example format, shown as a hint, not as placeholder-as-label. */
       example?: string;
