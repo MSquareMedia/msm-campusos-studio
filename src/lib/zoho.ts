@@ -157,9 +157,9 @@ function buildZohoLead(
   // Determine human-readable lead source
   let leadSource = "MSM CampusOS Studio";
   if (kind === "contact") leadSource = "Organic_Sotapo";
-  if (kind === "audit") leadSource = "Website Free Audit Flow";
-  if (kind === "careers") leadSource = "Website Careers Application";
-  if (kind === "osiq") leadSource = "Website OSiQ AI Assistant";
+  if (kind === "audit") leadSource = "Organic_Sotapo";
+  if (kind === "careers") leadSource = "Organic_Sotapo";
+  if (kind === "osiq") leadSource = "Organic_Sotapo";
 
   // Build clean description summarizing all provided details
   const descriptionLines: string[] = [
